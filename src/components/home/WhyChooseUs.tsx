@@ -1,4 +1,3 @@
-import React from 'react';
 import { CheckCircle, Award, Clock, Globe } from 'lucide-react';
 
 const WhyChooseUs = () => {
