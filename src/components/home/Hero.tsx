@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Play, Shield, Award, Globe, Star, CheckCircle } from 'lucide-react';
-import CertificationBadges from '../CertificationBadges';
+import { ArrowRight,  Shield, Award, Globe, Star, CheckCircle } from 'lucide-react';
+// import CertificationBadges from '../CertificationBadges';
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
