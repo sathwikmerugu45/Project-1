@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Search } from 'lucide-react';
+import { Menu, X, Search, ChevronDown } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -17,13 +18,63 @@ const Header = () => {
 
   const navigation = [
     { name: 'Home', path: '/' },
-    { name: 'Products', path: '/products' },
+    { 
+      name: 'Products', 
+      path: '/products',
+      hasDropdown: true,
+      dropdownItems: [
+        {
+          name: 'Biggo Swings',
+          path: '/products/biggo-swings',
+          image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=200&h=150&fit=crop',
+          description: 'Premium swing sets designed for maximum fun and safety'
+        },
+        {
+          name: 'Rotating Climbers',
+          path: '/products/rotating-climbers',
+          image: 'https://images.pexels.com/photos/1094072/pexels-photo-1094072.jpeg?auto=compress&cs=tinysrgb&w=200&h=150&fit=crop',
+          description: 'Dynamic climbing equipment that rotates for added challenge'
+        },
+        {
+          name: 'Frame Nets',
+          path: '/products/frame-nets',
+          image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=200&h=150&fit=crop',
+          description: 'Sturdy frame nets for climbing and exploration'
+        },
+        {
+          name: 'Mast Nets',
+          path: '/products/mast-nets',
+          image: 'https://images.pexels.com/photos/1094072/pexels-photo-1094072.jpeg?auto=compress&cs=tinysrgb&w=200&h=150&fit=crop',
+          description: 'Tall mast nets for adventurous climbing experiences'
+        },
+        {
+          name: 'Nature Play',
+          path: '/products/nature-play',
+          image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=200&h=150&fit=crop',
+          description: 'Natural play elements that connect children with nature'
+        },
+        {
+          name: 'Ropes Courses',
+          path: '/products/ropes-courses',
+          image: 'https://images.pexels.com/photos/1094072/pexels-photo-1094072.jpeg?auto=compress&cs=tinysrgb&w=200&h=150&fit=crop',
+          description: 'Challenging rope courses for skill development'
+        }
+      ]
+    },
     { name: 'Portfolio', path: '/projects' },
     { name: 'New Products', path: '/products?filter=new' },
     { name: 'Catalogue', path: '/resources' },
     { name: 'Play Matters', path: '/resources' },
     { name: 'About', path: '/about' },
   ];
+
+  const handleDropdownEnter = (itemName: string) => {
+    setActiveDropdown(itemName);
+  };
+
+  const handleDropdownLeave = () => {
+    setActiveDropdown(null);
+  };
 
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${
@@ -48,17 +99,47 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
             {navigation.map((item) => (
-              <Link
+              <div
                 key={item.name}
-                to={item.path}
-                className={`px-3 py-2 text-sm font-medium transition-colors ${
-                  location.pathname === item.path
-                    ? 'text-blue-600 border-b-2 border-blue-600'
-                    : 'text-gray-700 hover:text-blue-600'
-                }`}
+                className="relative"
+                onMouseEnter={() => item.hasDropdown && handleDropdownEnter(item.name)}
+                onMouseLeave={handleDropdownLeave}
               >
-                {item.name}
-              </Link>
+                <Link
+                  to={item.path}
+                  className={`flex items-center px-3 py-2 text-sm font-medium transition-colors ${
+                    location.pathname === item.path
+                      ? 'text-blue-600 border-b-2 border-blue-600'
+                      : 'text-gray-700 hover:text-blue-600'
+                  }`}
+                >
+                  {item.name}
+                  {item.hasDropdown && <ChevronDown className="ml-1 w-4 h-4" />}
+                </Link>
+
+                {/* Dropdown Menu */}
+                {item.hasDropdown && activeDropdown === item.name && (
+                  <div className="absolute top-full left-0 mt-2 w-96 bg-white rounded-lg shadow-xl border border-gray-100 p-4 grid grid-cols-2 gap-4">
+                    {item.dropdownItems?.map((dropdownItem) => (
+                      <Link
+                        key={dropdownItem.name}
+                        to={dropdownItem.path}
+                        className="flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                      >
+                        <img
+                          src={dropdownItem.image}
+                          alt={dropdownItem.name}
+                          className="w-16 h-12 object-cover rounded"
+                        />
+                        <div>
+                          <h4 className="font-medium text-gray-900 text-sm">{dropdownItem.name}</h4>
+                          <p className="text-xs text-gray-600 mt-1">{dropdownItem.description}</p>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
           </nav>
 

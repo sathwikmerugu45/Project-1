@@ -77,6 +77,174 @@ const ProductDetail = () => {
           price: '$4,150'
         }
       ]
+    },
+    'rotating-climbers': {
+      title: 'Explore Our Rotating Climbers Products',
+      subtitle: 'Dynamic climbing equipment that challenges children while providing safe, engaging play experiences.',
+      products: [
+        {
+          id: 'rc-2100',
+          name: 'Spinner Pro™',
+          model: 'RC-2100',
+          image: 'https://images.pexels.com/photos/1094072/pexels-photo-1094072.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+          description: 'Revolutionary rotating climber that spins 360 degrees while children climb and play.',
+          features: [
+            { icon: Activity, label: 'Balance', color: 'text-green-500' },
+            { icon: Users, label: 'Social Play', color: 'text-green-500' },
+            { icon: Zap, label: 'Rotation', color: 'text-green-500' },
+            { icon: Heart, label: 'Fitness', color: 'text-green-500' }
+          ],
+          sku: 'RC-2100',
+          category: 'Rotating Climbers',
+          price: '$5,850',
+          specifications: {
+            ASTM: {
+              'Size -- Diameter': '4.2 m',
+              'Size -- Height': '3.5 m',
+              'Ages': '5 - 12 yrs',
+              'Capacity': '8',
+              'Use Zone -- Diameter': '10.2 m',
+              'Use Zone -- Area': '81.7 m²',
+              'Fall Height': '2.8 m'
+            }
+          }
+        }
+      ]
+    },
+    'frame-nets': {
+      title: 'Explore Our Frame Nets Products',
+      subtitle: 'Sturdy climbing nets that provide challenging and safe climbing experiences for all ages.',
+      products: [
+        {
+          id: 'fn-1500',
+          name: 'Climb Master™',
+          model: 'FN-1500',
+          image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+          description: 'Heavy-duty frame net designed for intensive climbing and exploration activities.',
+          features: [
+            { icon: Activity, label: 'Climbing', color: 'text-purple-500' },
+            { icon: Users, label: 'Group Play', color: 'text-purple-500' },
+            { icon: Heart, label: 'Strength', color: 'text-purple-500' }
+          ],
+          sku: 'FN-1500',
+          category: 'Frame Nets',
+          price: '$3,750',
+          specifications: {
+            ASTM: {
+              'Size -- Length': '6.0 m',
+              'Size -- Width': '4.0 m',
+              'Size -- Height': '3.2 m',
+              'Ages': '5 - 12 yrs',
+              'Capacity': '12',
+              'Use Zone -- Length': '12.0 m',
+              'Use Zone -- Width': '10.0 m',
+              'Use Zone -- Area': '120 m²',
+              'Fall Height': '2.5 m'
+            }
+          }
+        }
+      ]
+    },
+    'mast-nets': {
+      title: 'Explore Our Mast Nets Products',
+      subtitle: 'Tall climbing structures that challenge adventurous children with vertical climbing experiences.',
+      products: [
+        {
+          id: 'mn-1800',
+          name: 'Sky Climber™',
+          model: 'MN-1800',
+          image: 'https://images.pexels.com/photos/1094072/pexels-photo-1094072.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+          description: 'Towering mast net that provides the ultimate climbing challenge for brave adventurers.',
+          features: [
+            { icon: Activity, label: 'Adventure', color: 'text-red-500' },
+            { icon: Heart, label: 'Courage', color: 'text-red-500' },
+            { icon: Zap, label: 'Challenge', color: 'text-red-500' }
+          ],
+          sku: 'MN-1800',
+          category: 'Mast Nets',
+          price: '$6,200',
+          specifications: {
+            ASTM: {
+              'Size -- Diameter': '3.5 m',
+              'Size -- Height': '5.0 m',
+              'Ages': '8 - 15 yrs',
+              'Capacity': '6',
+              'Use Zone -- Diameter': '9.5 m',
+              'Use Zone -- Area': '70.9 m²',
+              'Fall Height': '4.2 m'
+            }
+          }
+        }
+      ]
+    },
+    'nature-play': {
+      title: 'Explore Our Nature Play Products',
+      subtitle: 'Natural play elements that connect children with nature while providing engaging play experiences.',
+      products: [
+        {
+          id: 'np-2500',
+          name: 'Forest Explorer™',
+          model: 'NP-2500',
+          image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+          description: 'Natural wood climbing structure that blends seamlessly with outdoor environments.',
+          features: [
+            { icon: Activity, label: 'Nature Connection', color: 'text-green-600' },
+            { icon: Users, label: 'Exploration', color: 'text-green-600' },
+            { icon: Heart, label: 'Sustainability', color: 'text-green-600' }
+          ],
+          sku: 'NP-2500',
+          category: 'Nature Play',
+          price: '$4,800',
+          specifications: {
+            ASTM: {
+              'Size -- Length': '8.0 m',
+              'Size -- Width': '6.0 m',
+              'Size -- Height': '2.5 m',
+              'Ages': '2 - 12 yrs',
+              'Capacity': '15',
+              'Use Zone -- Length': '14.0 m',
+              'Use Zone -- Width': '12.0 m',
+              'Use Zone -- Area': '168 m²',
+              'Fall Height': '1.8 m'
+            }
+          }
+        }
+      ]
+    },
+    'ropes-courses': {
+      title: 'Explore Our Ropes Courses Products',
+      subtitle: 'Challenging rope courses that develop balance, coordination, and confidence in children.',
+      products: [
+        {
+          id: 'rc-3000',
+          name: 'Adventure Trail™',
+          model: 'RC-3000',
+          image: 'https://images.pexels.com/photos/1094072/pexels-photo-1094072.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+          description: 'Multi-level rope course with various challenges and obstacles for skill development.',
+          features: [
+            { icon: Activity, label: 'Balance', color: 'text-orange-500' },
+            { icon: Users, label: 'Teamwork', color: 'text-orange-500' },
+            { icon: Heart, label: 'Confidence', color: 'text-orange-500' },
+            { icon: Zap, label: 'Agility', color: 'text-orange-500' }
+          ],
+          sku: 'RC-3000',
+          category: 'Ropes Courses',
+          price: '$8,500',
+          specifications: {
+            ASTM: {
+              'Size -- Length': '12.0 m',
+              'Size -- Width': '8.0 m',
+              'Size -- Height': '4.0 m',
+              'Ages': '8 - 15 yrs',
+              'Capacity': '10',
+              'Use Zone -- Length': '18.0 m',
+              'Use Zone -- Width': '14.0 m',
+              'Use Zone -- Area': '252 m²',
+              'Fall Height': '3.5 m'
+            }
+          }
+        }
+      ]
     }
   };
 
