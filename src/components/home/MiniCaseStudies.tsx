@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Download, Clock, Quote, ArrowRight, MapPin, Calendar, Users } from 'lucide-react';
+import { Download, Clock, Quote, MapPin, Calendar, Users } from 'lucide-react';
 
 const MiniCaseStudies = () => {
   const [activeCase, setActiveCase] = useState(0);

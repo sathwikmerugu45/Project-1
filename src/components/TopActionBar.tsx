@@ -1,4 +1,4 @@
-import { Phone, Download, MapPin, Calendar, Globe, X } from 'lucide-react';
+import { Phone, Download, MapPin, Calendar, X } from 'lucide-react';
 import { useState } from 'react';
 import LanguageToggle from './LanguageToggle';
 

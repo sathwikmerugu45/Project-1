@@ -1,8 +1,17 @@
 import { useState } from 'react';
-import { Calculator, Download, MessageCircle, ArrowRight, MapPin, Users, Settings, Home } from 'lucide-react';
+import { Calculator, Download, MessageCircle, MapPin, Home } from 'lucide-react';
+
+interface FormData {
+  projectType: string;
+  surfaceArea: string;
+  ageGroups: string[];
+  location: string;
+  addOns: string[];
+  environment: string;
+}
 
 const QuoteEstimator = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     projectType: '',
     surfaceArea: '',
     ageGroups: [],
@@ -96,9 +105,9 @@ const QuoteEstimator = () => {
   const handleArrayToggle = (field: string, value: string) => {
     setFormData(prev => ({
       ...prev,
-      [field]: prev[field as keyof typeof prev].includes(value)
-        ? (prev[field as keyof typeof prev] as string[]).filter((item: string) => item !== value)
-        : [...(prev[field as keyof typeof prev] as string[]), value]
+      [field]: (prev[field as keyof FormData] as string[]).includes(value)
+        ? (prev[field as keyof FormData] as string[]).filter((item: string) => item !== value)
+        : [...(prev[field as keyof FormData] as string[]), value]
     }));
     setShowEstimate(false);
   };
