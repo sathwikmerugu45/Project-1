@@ -5,11 +5,14 @@ import Footer from './components/Footer';
 import StickyFooter from './components/StickyFooter';
 import Home from './pages/Home';
 import Products from './pages/Products';
+import Solutions from './pages/Solutions';
+import Company from './pages/Company';
+import Insights from './pages/Insights';
+import Contact from './pages/Contact';
+import ProductDetail from './pages/ProductDetail';
 import Projects from './pages/Projects';
 import About from './pages/About';
 import Resources from './pages/Resources';
-import Contact from './pages/Contact';
-import ProductDetail from './pages/ProductDetail';
 
 function App() {
   return (
@@ -22,10 +25,14 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />
             <Route path="/products/:id" element={<ProductDetail />} />
+            <Route path="/solutions" element={<Solutions />} />
+            <Route path="/company" element={<Company />} />
+            <Route path="/insights" element={<Insights />} />
+            <Route path="/contact" element={<Contact />} />
+            {/* Legacy routes for backward compatibility */}
             <Route path="/projects" element={<Projects />} />
             <Route path="/about" element={<About />} />
             <Route path="/resources" element={<Resources />} />
-            <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>
         <Footer />

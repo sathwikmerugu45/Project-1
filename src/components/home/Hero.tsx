@@ -1,66 +1,50 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Play, Shield, Users, Globe, Award } from 'lucide-react';
+import { ArrowRight, Play, Shield, Award, Globe, Star, CheckCircle } from 'lucide-react';
+import CertificationBadges from '../CertificationBadges';
 
 const Hero = () => {
-  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slides = [
+    {
+      image: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
+      title: 'Premium Playground Equipment',
+      subtitle: 'EN 1176, ASTM & CPSC Certified',
+      description: 'Professional playground solutions trusted by schools and communities worldwide'
+    },
+    {
+      image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
+      title: 'Safety First Innovation',
+      subtitle: 'International Standards Compliance',
+      description: 'Advanced safety features with cutting-edge playground technology'
+    },
+    {
+      image: 'https://images.pexels.com/photos/1094072/pexels-photo-1094072.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
+      title: 'Custom Design Solutions',
+      subtitle: 'Tailored to Your Space',
+      description: 'Bespoke playground equipment designed for your specific requirements'
+    }
+  ];
 
   useEffect(() => {
-    // Simulate video loading
-    const timer = setTimeout(() => {
-      setIsVideoLoaded(true);
-    }, 1000);
-    return () => clearTimeout(timer);
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(timer);
   }, []);
 
+  const currentSlideData = slides[currentSlide];
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Video Background */}
+    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      {/* Background Image with Overlay */}
       <div className="absolute inset-0">
-        {isVideoLoaded ? (
-          <div className="w-full h-full bg-gradient-to-br from-primary-600 to-accent-600 flex items-center justify-center">
-            {/* Video Placeholder - In production, this would be an actual video element */}
-            <div className="relative w-full h-full">
-              <img
-                src="https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
-                alt="Professional playground equipment installation"
-                className="w-full h-full object-cover"
-              />
-              {/* Video overlay to simulate video playback */}
-              <div className="absolute inset-0 bg-black/20">
-                <div className="absolute top-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                  <span>LIVE</span>
-                </div>
-                
-                {/* Simulated video controls */}
-                <div className="absolute bottom-4 left-4 right-4">
-                  <div className="bg-black/50 backdrop-blur-sm rounded-lg p-3">
-                    <div className="flex items-center justify-between text-white text-sm">
-                      <span>Professional Playground Installation - Riverside Park</span>
-                      <div className="flex items-center space-x-2">
-                        <Play className="w-4 h-4" />
-                        <span>2:34 / 5:20</span>
-                      </div>
-                    </div>
-                    <div className="w-full bg-white/20 rounded-full h-1 mt-2">
-                      <div className="bg-primary-400 h-1 rounded-full w-1/2"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="w-full h-full bg-gradient-to-br from-primary-600 to-accent-600 flex items-center justify-center">
-            <div className="text-white text-center">
-              <div className="w-16 h-16 border-4 border-white/30 border-t-white rounded-full animate-spin mx-auto mb-4"></div>
-              <p className="text-lg">Loading playground video...</p>
-            </div>
-          </div>
-        )}
-        
-        {/* Video Overlay */}
+        <img
+          src={currentSlideData.image}
+          alt="Professional playground equipment"
+          className="w-full h-full object-cover transition-opacity duration-1000"
+        />
         <div className="absolute inset-0 bg-gradient-to-r from-neutral-900/80 via-neutral-900/60 to-neutral-900/40"></div>
       </div>
 
@@ -85,25 +69,24 @@ const Hero = () => {
             </div>
 
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-              Safety First.
-              <span className="block text-gradient bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">
-                Innovation Always.
-              </span>
+              {currentSlideData.title}
             </h1>
             
+            <h2 className="text-2xl md:text-3xl text-primary-400 mb-4 font-semibold">
+              {currentSlideData.subtitle}
+            </h2>
+            
             <p className="text-xl md:text-2xl text-neutral-200 mb-8 leading-relaxed max-w-3xl">
-              EN 1176, ASTM & CPSC certified equipment trusted by communities worldwide. 
-              We don't just build play areas, we help cities and schools design childhood.
+              {currentSlideData.description}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <Link to="#brand-video" className="btn-primary inline-flex items-center justify-center group">
-                <Play className="mr-2 w-5 h-5" />
-                Watch Our Story
+              <Link to="/products" className="btn-primary inline-flex items-center justify-center group">
+                View Products
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link to="#quote-estimator" className="btn-secondary inline-flex items-center justify-center">
-                Get Smart Quote
+              <Link to="/contact" className="btn-secondary inline-flex items-center justify-center">
+                Get Quote
               </Link>
             </div>
 
@@ -118,29 +101,34 @@ const Hero = () => {
               </div>
               <div className="text-center sm:text-left">
                 <div className="flex items-center justify-center sm:justify-start mb-2">
-                  <Play className="w-6 h-6 text-accent-400 mr-2" />
+                  <Star className="w-6 h-6 text-accent-400 mr-2" />
                   <span className="text-3xl font-bold text-white">950+</span>
                 </div>
                 <p className="text-neutral-300">Projects Completed</p>
               </div>
               <div className="text-center sm:text-left">
                 <div className="flex items-center justify-center sm:justify-start mb-2">
-                  <Users className="w-6 h-6 text-primary-400 mr-2" />
+                  <CheckCircle className="w-6 h-6 text-primary-400 mr-2" />
                   <span className="text-3xl font-bold text-white">50K+</span>
                 </div>
-                <p className="text-neutral-300">Happy Children Daily</p>
+                <p className="text-neutral-300">Happy Clients</p>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Video Quality Indicator */}
-      <div className="absolute top-4 left-4 z-10">
-        <div className="bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm flex items-center space-x-2">
-          <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-          <span>HD Quality</span>
-        </div>
+      {/* Slide Indicators */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              index === currentSlide ? 'bg-primary-400' : 'bg-white/30'
+            }`}
+          />
+        ))}
       </div>
 
       {/* Scroll Indicator */}

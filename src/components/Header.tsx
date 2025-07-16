@@ -62,11 +62,10 @@ const Header = () => {
         }
       ]
     },
-    { name: 'Portfolio', path: '/projects' },
-    { name: 'New Products', path: '/products?filter=new' },
-    { name: 'Catalogue', path: '/resources' },
-    { name: 'Play Matters', path: '/resources' },
-    { name: 'About', path: '/about' },
+    { name: 'Solutions', path: '/solutions' },
+    { name: 'Company', path: '/company' },
+    { name: 'Insights', path: '/insights' },
+    { name: 'Contact', path: '/contact' },
   ];
 
   const handleDropdownEnter = (itemName: string) => {

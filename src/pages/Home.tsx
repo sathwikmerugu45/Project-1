@@ -1,27 +1,17 @@
 import Hero from '../components/home/Hero';
-import BrandVideo from '../components/home/BrandVideo';
-import QuoteEstimator from '../components/home/QuoteEstimator';
-import Features from '../components/home/Features';
-import Portfolio from '../components/home/Portfolio';
-import MiniCaseStudies from '../components/home/MiniCaseStudies';
-import ResourceToolkit from '../components/home/ResourceToolkit';
+import FeaturedProducts from '../components/home/FeaturedProducts';
+import ProductCategories from '../components/home/ProductCategories';
 import WhyChooseUs from '../components/home/WhyChooseUs';
-import Testimonials from '../components/home/Testimonials';
-import CTA from '../components/home/CTA';
+import QuickContact from '../components/home/QuickContact';
 
 const Home = () => {
   return (
     <div>
       <Hero />
-      <BrandVideo />
-      <QuoteEstimator />
-      <Features />
-      <Portfolio />
-      <MiniCaseStudies />
-      <ResourceToolkit />
+      <FeaturedProducts />
+      <ProductCategories />
       <WhyChooseUs />
-      <Testimonials />
-      <CTA />
+      <QuickContact />
     </div>
   );
 };
