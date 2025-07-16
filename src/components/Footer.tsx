@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 
@@ -15,13 +14,6 @@ const Footer = () => {
     { name: 'Our Projects', path: '/projects' },
     { name: 'Resources', path: '/resources' },
     { name: 'Contact', path: '/contact' },
-  ];
-
-  const resourceLinks = [
-    { name: 'Safety Standards', path: '/resources' },
-    { name: 'Installation Guides', path: '/resources' },
-    { name: 'Maintenance Tips', path: '/resources' },
-    { name: 'Design Inspiration', path: '/resources' },
   ];
 
   return (
