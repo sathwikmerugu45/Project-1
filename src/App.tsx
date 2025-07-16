@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import TopActionBar from './components/TopActionBar';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import StickyFooter from './components/StickyFooter';
@@ -14,6 +15,7 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen bg-white">
+        <TopActionBar />
         <Header />
         <main>
           <Routes>

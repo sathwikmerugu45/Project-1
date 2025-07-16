@@ -3,54 +3,66 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Play, Shield, Users, Globe, Award } from 'lucide-react';
 
 const Hero = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  
-  const heroSlides = [
-    {
-      image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
-      title: '10 Years. 950+ Projects.',
-      subtitle: 'Globally Trusted Playground Partner',
-      description: 'We don\'t just build play areas, we help cities and schools design childhood.'
-    },
-    {
-      image: 'https://images.pexels.com/photos/1094072/pexels-photo-1094072.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
-      title: 'Safety First.',
-      subtitle: 'Innovation Always.',
-      description: 'EN 1176, ASTM & CPSC certified equipment trusted by communities worldwide.'
-    },
-    {
-      image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
-      title: 'From Vision',
-      subtitle: 'To Joyful Reality',
-      description: 'Every playground tells a story. Let us help you write yours.'
-    }
-  ];
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 5000);
-    return () => clearInterval(timer);
+    // Simulate video loading
+    const timer = setTimeout(() => {
+      setIsVideoLoaded(true);
+    }, 1000);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Images with Smooth Transition */}
-      {heroSlides.map((slide, index) => (
-        <div
-          key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-            index === currentSlide ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          <img
-            src={slide.image}
-            alt="Children playing on playground equipment"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-neutral-900/80 via-neutral-900/60 to-neutral-900/40"></div>
-        </div>
-      ))}
+      {/* Video Background */}
+      <div className="absolute inset-0">
+        {isVideoLoaded ? (
+          <div className="w-full h-full bg-gradient-to-br from-primary-600 to-accent-600 flex items-center justify-center">
+            {/* Video Placeholder - In production, this would be an actual video element */}
+            <div className="relative w-full h-full">
+              <img
+                src="https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
+                alt="Children playing on playground equipment"
+                className="w-full h-full object-cover"
+              />
+              {/* Video overlay to simulate video playback */}
+              <div className="absolute inset-0 bg-black/20">
+                <div className="absolute top-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                  <span>LIVE</span>
+                </div>
+                
+                {/* Simulated video controls */}
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="bg-black/50 backdrop-blur-sm rounded-lg p-3">
+                    <div className="flex items-center justify-between text-white text-sm">
+                      <span>Children Playing at Riverside Park</span>
+                      <div className="flex items-center space-x-2">
+                        <Play className="w-4 h-4" />
+                        <span>2:34 / 5:20</span>
+                      </div>
+                    </div>
+                    <div className="w-full bg-white/20 rounded-full h-1 mt-2">
+                      <div className="bg-primary-400 h-1 rounded-full w-1/2"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="w-full h-full bg-gradient-to-br from-primary-600 to-accent-600 flex items-center justify-center">
+            <div className="text-white text-center">
+              <div className="w-16 h-16 border-4 border-white/30 border-t-white rounded-full animate-spin mx-auto mb-4"></div>
+              <p className="text-lg">Loading playground video...</p>
+            </div>
+          </div>
+        )}
+        
+        {/* Video Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-neutral-900/80 via-neutral-900/60 to-neutral-900/40"></div>
+      </div>
 
       {/* Content */}
       <div className="relative z-10 container-max px-4 sm:px-6 lg:px-8">
@@ -73,14 +85,15 @@ const Hero = () => {
             </div>
 
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-              {heroSlides[currentSlide].title}
+              Safety First.
               <span className="block text-gradient bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">
-                {heroSlides[currentSlide].subtitle}
+                Innovation Always.
               </span>
             </h1>
             
             <p className="text-xl md:text-2xl text-neutral-200 mb-8 leading-relaxed max-w-3xl">
-              {heroSlides[currentSlide].description}
+              EN 1176, ASTM & CPSC certified equipment trusted by communities worldwide. 
+              We don't just build play areas, we help cities and schools design childhood.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
@@ -122,17 +135,12 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Slide Indicators */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 flex space-x-2">
-        {heroSlides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              index === currentSlide ? 'bg-white' : 'bg-white/50'
-            }`}
-          />
-        ))}
+      {/* Video Quality Indicator */}
+      <div className="absolute top-4 left-4 z-10">
+        <div className="bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm flex items-center space-x-2">
+          <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+          <span>HD Quality</span>
+        </div>
       </div>
 
       {/* Scroll Indicator */}
