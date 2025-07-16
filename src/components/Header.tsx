@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Search, ChevronDown } from 'lucide-react';
+import LanguageToggle from './LanguageToggle';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -144,7 +145,8 @@ const Header = () => {
           </nav>
 
           {/* Search Icon */}
-          <div className="hidden lg:flex items-center">
+          <div className="hidden lg:flex items-center space-x-4">
+            <LanguageToggle />
             <button className="p-2 text-gray-600 hover:text-blue-600 transition-colors">
               <Search className="w-5 h-5" />
             </button>

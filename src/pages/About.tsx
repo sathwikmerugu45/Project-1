@@ -1,5 +1,6 @@
 import { Shield, Award, Users, Globe, CheckCircle, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import CertificationBadges from '../components/CertificationBadges';
 
 const About = () => {
   const values = [
@@ -291,11 +292,15 @@ const About = () => {
               Certifications & Standards
             </h2>
             <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
-              We maintain the highest industry certifications and exceed safety standards 
-              to ensure every playground we create is safe, durable, and compliant.
+              We maintain the highest industry certifications and exceed international safety standards 
+              to ensure every playground we create is safe, durable, and globally compliant.
             </p>
           </div>
 
+          <div className="mb-12">
+            <CertificationBadges variant="detailed" size="large" />
+          </div>
+          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {certifications.map((cert, index) => (
               <div
@@ -307,6 +312,21 @@ const About = () => {
                 <span className="text-neutral-700 font-medium">{cert}</span>
               </div>
             ))}
+          </div>
+          
+          <div className="mt-12 text-center">
+            <div className="bg-gradient-to-r from-primary-50 to-accent-50 p-8 rounded-2xl">
+              <h3 className="text-2xl font-bold text-neutral-900 mb-4">
+                International Trust & Compliance
+              </h3>
+              <p className="text-neutral-600 mb-6 max-w-2xl mx-auto">
+                Our EN certification and global compliance standards ensure your playground 
+                meets international safety requirements, building trust with communities worldwide.
+              </p>
+              <button className="btn-primary">
+                Download Certification Documents
+              </button>
+            </div>
           </div>
         </div>
       </section>

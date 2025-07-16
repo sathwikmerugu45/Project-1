@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Filter, Search } from 'lucide-react';
 
 const Products = () => {
   const [activeCategory, setActiveCategory] = useState('all');
+  const [searchTerm, setSearchTerm] = useState('');
 
   const categories = [
     { id: 'all', name: 'All Products' },
@@ -89,7 +91,11 @@ const Products = () => {
 
   const filteredProducts = activeCategory === 'all' 
     ? products 
-    : products.filter(product => product.category === activeCategory);
+    : products.filter(product => product.category === activeCategory)
+      .filter(product => 
+        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.description.toLowerCase().includes(searchTerm.toLowerCase())
+      );
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -107,8 +113,27 @@ const Products = () => {
       </section>
 
       {/* Category Filter */}
-      <section className="bg-white py-6 border-b">
+      <section className="bg-white py-8 border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Search Bar */}
+          <div className="max-w-md mx-auto mb-6">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-neutral-400" />
+              <input
+                type="text"
+                placeholder="Search products..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-10 pr-4 py-3 border border-neutral-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              />
+            </div>
+          </div>
+          
+          {/* Category Filters */}
+          <div className="flex items-center justify-center mb-4">
+            <Filter className="w-5 h-5 text-neutral-600 mr-3" />
+            <span className="text-neutral-600 font-medium mr-4">Filter by category:</span>
+          </div>
           <div className="flex flex-wrap justify-center gap-4">
             {categories.map((category) => (
               <button

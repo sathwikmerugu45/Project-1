@@ -117,11 +117,13 @@ const Footer = () => {
               <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
               <a href="#" className="hover:text-white transition-colors">Accessibility</a>
             </div>
-            <div className="flex items-center space-x-4 text-sm text-neutral-400">
+            <div className="flex items-center space-x-4 text-sm text-neutral-400 flex-wrap">
               <span>Certified by:</span>
               <span className="px-3 py-1 bg-neutral-800 rounded-full">EN 1176</span>
               <span className="px-3 py-1 bg-neutral-800 rounded-full">ASTM</span>
               <span className="px-3 py-1 bg-neutral-800 rounded-full">CPSC</span>
+              <span className="px-3 py-1 bg-neutral-800 rounded-full">ISO 9001</span>
+              <span className="px-3 py-1 bg-neutral-800 rounded-full">GREENGUARD</span>
             </div>
           </div>
         </div>

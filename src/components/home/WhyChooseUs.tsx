@@ -1,4 +1,5 @@
 import { CheckCircle, Award, Clock, Globe } from 'lucide-react';
+import CertificationBadges from '../CertificationBadges';
 
 const WhyChooseUs = () => {
   const stats = [
@@ -76,6 +77,14 @@ const WhyChooseUs = () => {
               <button className="btn-secondary">
                 Download Brochure
               </button>
+            </div>
+            
+            {/* Certifications */}
+            <div className="mt-8">
+              <h4 className="text-lg font-semibold text-neutral-900 mb-4">
+                Certified & Compliant:
+              </h4>
+              <CertificationBadges variant="compact" size="medium" />
             </div>
           </div>
 

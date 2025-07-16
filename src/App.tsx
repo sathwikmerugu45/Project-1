@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import StickyFooter from './components/StickyFooter';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import Projects from './pages/Projects';
@@ -26,6 +27,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
+        <StickyFooter />
       </div>
     </Router>
   );
