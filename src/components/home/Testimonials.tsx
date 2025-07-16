@@ -6,7 +6,7 @@ const Testimonials = () => {
       name: 'Sarah Johnson',
       title: 'Parks & Recreation Director',
       organization: 'City of Portland',
-      image: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop',
+      image: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop',
       content: 'PlaygroundPro exceeded our expectations in every way. The installation was seamless, and the community response has been overwhelmingly positive. Children of all abilities can play together safely.',
       rating: 5,
       project: 'Riverside Community Park'
@@ -15,7 +15,7 @@ const Testimonials = () => {
       name: 'Michael Chen',
       title: 'Principal',
       organization: 'Sunshine Elementary School',
-      image: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop',
+      image: 'https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop',
       content: 'The educational play elements have transformed our playground into an outdoor classroom. Students are more engaged during recess, and we\'ve seen improved social interaction.',
       rating: 5,
       project: 'School Playground Renovation'
@@ -24,7 +24,7 @@ const Testimonials = () => {
       name: 'Lisa Rodriguez',
       title: 'Community Center Manager',
       organization: 'Denver Recreation',
-      image: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop',
+      image: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop',
       content: 'The inclusive design features have made our playground truly accessible to all children. The quality and attention to detail in every component is exceptional.',
       rating: 5,
       project: 'Harmony Inclusive Playground'

@@ -17,9 +17,9 @@ const ProjectDetail = () => {
       duration: '6 months',
       size: '5,000 sq ft',
       images: [
-        'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop',
-        'https://images.pexels.com/photos/1094072/pexels-photo-1094072.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop',
-        'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop'
+        'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop',
+        'https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop',
+        'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop'
       ],
       overview: 'The Riverside Community Park project transformed an underutilized green space into a vibrant community hub featuring natural play elements, inclusive equipment, and fitness stations for all ages. This comprehensive playground serves as a model for sustainable, accessible recreation design.',
       challenge: 'The City of Portland needed to revitalize a 5,000 square foot area that would serve a diverse community with varying ages and abilities. The space needed to accommodate high usage while maintaining environmental sustainability and ensuring universal accessibility.',

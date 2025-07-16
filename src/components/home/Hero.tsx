@@ -22,8 +22,8 @@ const Hero = () => {
             {/* Video Placeholder - In production, this would be an actual video element */}
             <div className="relative w-full h-full">
               <img
-                src="https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
-                alt="Children playing on playground equipment"
+                src="https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
+                alt="Professional playground equipment installation"
                 className="w-full h-full object-cover"
               />
               {/* Video overlay to simulate video playback */}
@@ -37,7 +37,7 @@ const Hero = () => {
                 <div className="absolute bottom-4 left-4 right-4">
                   <div className="bg-black/50 backdrop-blur-sm rounded-lg p-3">
                     <div className="flex items-center justify-between text-white text-sm">
-                      <span>Children Playing at Riverside Park</span>
+                      <span>Professional Playground Installation - Riverside Park</span>
                       <div className="flex items-center space-x-2">
                         <Play className="w-4 h-4" />
                         <span>2:34 / 5:20</span>

@@ -48,8 +48,8 @@ const BrandVideo = () => {
         <div className="relative max-w-5xl mx-auto mb-16">
           <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl">
             <img
-              src="https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=1200&h=675&fit=crop"
-              alt="Brand video preview"
+              src="https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=1200&h=675&fit=crop"
+              alt="Professional playground equipment showcase"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-neutral-900/40 flex items-center justify-center">
@@ -66,7 +66,7 @@ const BrandVideo = () => {
               <div className="bg-white/10 backdrop-blur-md rounded-lg p-4">
                 <h3 className="text-lg font-semibold mb-2">The Sathwik Story</h3>
                 <p className="text-sm text-neutral-200 mb-3">
-                  Founder narration • Drone installations • Children's joy
+                  Founder narration • Drone installations • Equipment showcase
                 </p>
                 <div className="flex items-center space-x-4 text-xs text-neutral-300">
                   <span className="flex items-center">

@@ -97,7 +97,7 @@ const Resources = () => {
       author: 'Sarah Chen',
       date: '2024-01-20',
       readTime: '5 min read',
-      image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop'
+      image: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop'
     },
     {
       id: 2,
@@ -106,7 +106,7 @@ const Resources = () => {
       author: 'David Thompson',
       date: '2024-01-15',
       readTime: '7 min read',
-      image: 'https://images.pexels.com/photos/1094072/pexels-photo-1094072.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop'
+      image: 'https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop'
     },
     {
       id: 3,
@@ -115,7 +115,7 @@ const Resources = () => {
       author: 'Michael Rodriguez',
       date: '2024-01-10',
       readTime: '6 min read',
-      image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop'
+      image: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop'
     }
   ];
 

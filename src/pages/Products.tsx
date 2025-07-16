@@ -21,70 +21,70 @@ const Products = () => {
       id: 'biggo-swings',
       name: 'Biggo Swings',
       category: 'swings',
-      image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
+      image: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
       description: 'Premium swing sets designed for maximum fun and safety'
     },
     {
       id: 'rotating-climbers',
       name: 'Rotating Climbers',
       category: 'climbers',
-      image: 'https://images.pexels.com/photos/1094072/pexels-photo-1094072.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
+      image: 'https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
       description: 'Dynamic climbing equipment that rotates for added challenge'
     },
     {
       id: 'frame-nets',
       name: 'Frame Nets',
       category: 'nets',
-      image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
+      image: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
       description: 'Sturdy frame nets for climbing and exploration'
     },
     {
       id: 'mast-nets',
       name: 'Mast Nets',
       category: 'nets',
-      image: 'https://images.pexels.com/photos/1094072/pexels-photo-1094072.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
+      image: 'https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
       description: 'Tall mast nets for adventurous climbing experiences'
     },
     {
       id: 'nature-play',
       name: 'Nature Play',
       category: 'nature',
-      image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
+      image: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
       description: 'Natural play elements that connect children with nature'
     },
     {
       id: 'ropes-courses',
       name: 'Ropes Courses',
       category: 'ropes',
-      image: 'https://images.pexels.com/photos/1094072/pexels-photo-1094072.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
+      image: 'https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
       description: 'Challenging rope courses for skill development'
     },
     {
       id: 'custom-creations',
       name: 'Custom Creations',
       category: 'all',
-      image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
+      image: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
       description: 'Bespoke playground equipment tailored to your needs'
     },
     {
       id: 'sports-fitness',
       name: 'Sports and Fitness',
       category: 'sports',
-      image: 'https://images.pexels.com/photos/1094072/pexels-photo-1094072.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
+      image: 'https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
       description: 'Outdoor fitness equipment for all ages'
     },
     {
       id: 'conludo',
       name: 'Conludo',
       category: 'all',
-      image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
+      image: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
       description: 'Interactive play solutions for modern playgrounds'
     },
     {
       id: 'natures-aura',
       name: "Nature's Aura",
       category: 'nature',
-      image: 'https://images.pexels.com/photos/1094072/pexels-photo-1094072.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
+      image: 'https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
       description: 'Immersive natural play environments'
     }
   ];

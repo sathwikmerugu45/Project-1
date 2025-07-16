@@ -16,7 +16,7 @@ const ProductDetail = () => {
           id: 'dx-3100',
           name: 'Biggo Solo™',
           model: 'DX-3100',
-          image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+          image: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
           description: 'Our classic, inclusive biggo swing with 2 fro swinging action. This game allows for more people to swing together!',
           features: [
             { icon: Activity, label: 'Imagination', color: 'text-blue-500' },
@@ -66,14 +66,14 @@ const ProductDetail = () => {
           id: 'dx-3200',
           name: 'Biggo Duo™',
           model: 'DX-3200',
-          image: 'https://images.pexels.com/photos/1094072/pexels-photo-1094072.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+          image: 'https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
           price: '$3,250'
         },
         {
           id: 'dx-3300',
           name: 'Biggo Trio™',
           model: 'DX-3300',
-          image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+          image: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
           price: '$4,150'
         }
       ]
