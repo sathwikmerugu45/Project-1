@@ -10,7 +10,7 @@ const ProductDetail = () => {
   const productData = {
     'biggo-swings': {
       title: 'Explore Our Biggo Swings Products',
-      subtitle: 'The best things in life are shared, so Dynamo took a traditional playground favourite and made it even better.',
+      subtitle: 'The best things in life are shared, so Sathwik took a traditional playground favourite and made it even better.',
       products: [
         {
           id: 'dx-3100',
