@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Download, FileText, Video, BookOpen, Search, Calendar, User, ArrowRight } from 'lucide-react';
+import { useState } from 'react';
+import { Download, FileText, Search, Calendar, User, ArrowRight } from 'lucide-react';
 
 const Resources = () => {
   const [activeCategory, setActiveCategory] = useState('all');

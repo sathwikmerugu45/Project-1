@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Users, Activity, Heart, Zap } from 'lucide-react';
 
@@ -295,7 +295,7 @@ const ProductDetail = () => {
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            {product.products.map((item, index) => (
+            {product.products.map((item) => (
               <div key={item.id} className="text-center">
                 <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-4">
                   <img
@@ -345,16 +345,18 @@ const ProductDetail = () => {
               </p>
 
               {/* Features Grid */}
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                {mainProduct.features.map((feature, index) => (
-                  <div key={index} className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                      <feature.icon className={`w-5 h-5 ${feature.color}`} />
+              {mainProduct.features && (
+                <div className="grid grid-cols-2 gap-4 mb-8">
+                  {mainProduct.features.map((feature, index) => (
+                    <div key={index} className="flex items-center space-x-3">
+                      <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                        <feature.icon className={`w-5 h-5 ${feature.color}`} />
+                      </div>
+                      <span className="text-gray-700">{feature.label}</span>
                     </div>
-                    <span className="text-gray-700">{feature.label}</span>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
 
               {/* Product Info */}
               <div className="space-y-2 mb-6">
@@ -381,35 +383,39 @@ const ProductDetail = () => {
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Specifications:</h3>
               
               {/* Spec Tabs */}
-              <div className="flex space-x-0 mb-6">
-                {Object.keys(mainProduct.specifications).map((spec) => (
-                  <button
-                    key={spec}
-                    onClick={() => setActiveSpec(spec)}
-                    className={`px-6 py-3 font-semibold transition-colors ${
-                      activeSpec === spec
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                    } ${spec === 'ASTM' ? 'rounded-l-lg' : spec === 'EN' ? 'rounded-r-lg' : ''}`}
-                  >
-                    {spec}
-                  </button>
-                ))}
-              </div>
+              {mainProduct.specifications && (
+                <div className="flex space-x-0 mb-6">
+                  {Object.keys(mainProduct.specifications).map((spec) => (
+                    <button
+                      key={spec}
+                      onClick={() => setActiveSpec(spec)}
+                      className={`px-6 py-3 font-semibold transition-colors ${
+                        activeSpec === spec
+                          ? 'bg-blue-600 text-white'
+                          : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                      } ${spec === 'ASTM' ? 'rounded-l-lg' : spec === 'EN' ? 'rounded-r-lg' : ''}`}
+                    >
+                      {spec}
+                    </button>
+                  ))}
+                </div>
+              )}
 
               {/* Specifications Table */}
-              <div className="bg-white rounded-lg shadow overflow-hidden">
-                <table className="w-full">
-                  <tbody>
-                    {Object.entries(mainProduct.specifications[activeSpec as keyof typeof mainProduct.specifications]).map(([key, value], index) => (
-                      <tr key={key} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
-                        <td className="px-6 py-4 text-sm font-medium text-gray-900">{key}</td>
-                        <td className="px-6 py-4 text-sm text-gray-600">{value}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+              {mainProduct.specifications && (
+                <div className="bg-white rounded-lg shadow overflow-hidden">
+                  <table className="w-full">
+                    <tbody>
+                      {Object.entries(mainProduct.specifications[activeSpec as keyof typeof mainProduct.specifications]).map(([key, value], index) => (
+                        <tr key={key} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
+                          <td className="px-6 py-4 text-sm font-medium text-gray-900">{key}</td>
+                          <td className="px-6 py-4 text-sm text-gray-600">{value as string}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
 
               <div className="mt-6 text-center">
                 <button className="text-blue-600 hover:text-blue-700 font-medium">

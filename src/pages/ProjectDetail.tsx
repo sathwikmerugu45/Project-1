@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, MapPin, Calendar, Users, DollarSign, CheckCircle, Quote } from 'lucide-react';
 
