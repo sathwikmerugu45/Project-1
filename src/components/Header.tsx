@@ -85,7 +85,7 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
             <div className="flex items-center">
-              <span className="text-3xl font-bold text-red-600">DYNAMO</span>
+              <span className="text-3xl font-bold text-red-600">SATHWIK</span>
               <div className="ml-2 flex flex-col">
                 <span className="text-xs text-blue-600 font-semibold tracking-wider">PLAYGROUNDS</span>
                 <div className="flex space-x-1">
