@@ -9,7 +9,6 @@ import About from './pages/About';
 import Resources from './pages/Resources';
 import Contact from './pages/Contact';
 import ProductDetail from './pages/ProductDetail';
-import ProjectDetail from './pages/ProjectDetail';
 
 function App() {
   return (
@@ -20,9 +19,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />
-            <Route path="/products/:category" element={<ProductDetail />} />
+            <Route path="/products/:id" element={<ProductDetail />} />
             <Route path="/projects" element={<Projects />} />
-            <Route path="/projects/:id" element={<ProjectDetail />} />
             <Route path="/about" element={<About />} />
             <Route path="/resources" element={<Resources />} />
             <Route path="/contact" element={<Contact />} />
