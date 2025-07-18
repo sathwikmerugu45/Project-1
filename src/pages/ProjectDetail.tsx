@@ -231,25 +231,12 @@ const ProjectDetail = () => {
                   Results & Impact
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {project.results.map(
-                    (
-                      result:
-                        | string
-                        | number
-                        | boolean
-                        | ReactElement<any, string | JSXElementConstructor<any>>
-                        | Iterable<ReactNode>
-                        | ReactPortal
-                        | null
-                        | undefined,
-                      index: Key | null | undefined
-                    ) => (
-                      <div key={index} className="flex items-start space-x-3">
-                        <CheckCircle className="w-5 h-5 text-accent-500 mt-1 flex-shrink-0" />
-                        <span className="text-neutral-700">{result}</span>
-                      </div>
-                    )
-                  )}
+                  {project.results.map((result, index) => (
+                    <div key={index} className="flex items-start space-x-3">
+                      <CheckCircle className="w-5 h-5 text-accent-500 mt-1 flex-shrink-0" />
+                      <span className="text-neutral-700">{result}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
