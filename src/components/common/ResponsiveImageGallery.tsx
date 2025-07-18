@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, X, ZoomIn, ZoomOut, RotateCw } from 'lucide-react';
-import { useResponsive, useTouch } from '../../hooks/useResponsive';
+import { useResponsive} from '../../hooks/useResponsive';
 import LazyImage from './LazyImage';
 import TouchFriendlyButton from './TouchFriendlyButton';
 

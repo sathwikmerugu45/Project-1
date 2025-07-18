@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Search, Filter, X, Calendar, MapPin, DollarSign, Users, ChevronDown } from 'lucide-react';
-import { ProjectFilter as ProjectFilterType, ProjectSortOption, PROJECT_SORT_OPTIONS } from '../../types/project';
+import { ProjectFilter as ProjectFilterType, PROJECT_SORT_OPTIONS } from '../../types/project';
 import { ProjectType } from '../../types/common';
 
 interface ProjectFilterProps {
@@ -21,14 +21,12 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
   className = ''
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   const clientTypeOptions: { value: ProjectType; label: string }[] = [
-    { value: 'school', label: 'Schools' },
-    { value: 'park', label: 'Parks & Recreation' },
-    { value: 'community', label: 'Community Centers' },
-    { value: 'residential', label: 'Residential' },
-    { value: 'commercial', label: 'Commercial' }
+    { value: 'School', label: 'Schools' },
+    { value: 'Public Park', label: 'Parks & Recreation' },
+    { value: 'Community Center', label: 'Community Centers' },
+    { value: 'Residential', label: 'Residential' }
   ];
 
   const budgetRangeOptions = [
@@ -89,13 +87,6 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
     onFilterChange({ ...filter, features: newFeatures });
   };
 
-  const handleLocationChange = (location: string) => {
-    const newLocations = filter.locations.includes(location)
-      ? filter.locations.filter(l => l !== location)
-      : [...filter.locations, location];
-    onFilterChange({ ...filter, locations: newLocations });
-  };
-
   const clearAllFilters = () => {
     onFilterChange({
       clientTypes: [],
@@ -114,10 +105,6 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
            filter.features.length + 
            filter.locations.length +
            (filter.searchQuery ? 1 : 0);
-  };
-
-  const toggleDropdown = (dropdown: string) => {
-    setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
   };
 
   return (

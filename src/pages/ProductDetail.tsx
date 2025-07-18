@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Users, Activity, Heart, Zap, ShoppingCart, Share2, Bookmark } from 'lucide-react';
+import {  ShoppingCart, Share2, Bookmark } from 'lucide-react';
 import { sampleProducts } from '../data/products';
 import { Product, ProductVariant, CustomizationOption } from '../types/product';
 import { Certification } from '../types/certification';
@@ -14,7 +14,7 @@ import CustomizationOptions from '../components/product/CustomizationOptions';
 const ProductDetail = () => {
   const { id } = useParams();
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(null);
-  const [customizationSelections, setCustomizationSelections] = useState<Record<string, string>>({});
+  const [, setCustomizationSelections] = useState<Record<string, string>>({});
 
   // Find the product from our sample data
   const currentProduct = sampleProducts.find(p => p.id === id);

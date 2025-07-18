@@ -21,12 +21,11 @@ const Projects = () => {
     {
       id: '1',
       title: 'Riverside Community Park',
-      clientType: 'park',
+      clientType: 'Public Park',
       clientName: 'City of Portland Parks & Recreation',
       location: 'Portland, Oregon',
       completionYear: 2024,
       images: [{
-        id: '1',
         url: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
         alt: 'Riverside Community Park',
         caption: 'Main playground area',
@@ -55,12 +54,11 @@ const Projects = () => {
     {
       id: '2',
       title: 'Sunshine Elementary School',
-      clientType: 'school',
+      clientType: 'School',
       clientName: 'Austin Independent School District',
       location: 'Austin, Texas',
       completionYear: 2024,
       images: [{
-        id: '2',
         url: 'https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
         alt: 'Sunshine Elementary School Playground',
         caption: 'Educational play structures',
@@ -89,12 +87,11 @@ const Projects = () => {
     {
       id: '3',
       title: 'Harmony Inclusive Playground',
-      clientType: 'community',
+      clientType: 'Community Center',
       clientName: 'Denver Parks and Recreation',
       location: 'Denver, Colorado',
       completionYear: 2023,
       images: [{
-        id: '3',
         url: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
         alt: 'Harmony Inclusive Playground',
         caption: 'Fully accessible playground design',
@@ -123,12 +120,11 @@ const Projects = () => {
     {
       id: '4',
       title: 'Woodland Adventure Park',
-      clientType: 'park',
+      clientType: 'Public Park',
       clientName: 'Seattle Parks Department',
       location: 'Seattle, Washington',
       completionYear: 2023,
       images: [{
-        id: '4',
         url: 'https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
         alt: 'Woodland Adventure Park',
         caption: 'Nature-inspired playground',
@@ -157,12 +153,11 @@ const Projects = () => {
     {
       id: '5',
       title: 'Metro High School Fitness Zone',
-      clientType: 'school',
+      clientType: 'School',
       clientName: 'Phoenix Union High School District',
       location: 'Phoenix, Arizona',
       completionYear: 2023,
       images: [{
-        id: '5',
         url: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
         alt: 'Metro High School Fitness Zone',
         caption: 'Outdoor fitness equipment',
@@ -191,12 +186,11 @@ const Projects = () => {
     {
       id: '6',
       title: 'Lakeside Family Recreation',
-      clientType: 'park',
+      clientType: 'Public Park',
       clientName: 'Minneapolis Park Board',
       location: 'Minneapolis, Minnesota',
       completionYear: 2022,
       images: [{
-        id: '6',
         url: 'https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
         alt: 'Lakeside Family Recreation',
         caption: 'Multi-generational playground',
@@ -312,12 +306,11 @@ const Projects = () => {
   };
 
   const getClientTypeLabel = (clientType: ProjectType): string => {
-    const labels = {
-      school: 'School',
-      park: 'Park & Recreation',
-      community: 'Community Center',
-      residential: 'Residential',
-      commercial: 'Commercial'
+    const labels: Record<ProjectType, string> = {
+      'School': 'School',
+      'Public Park': 'Park & Recreation',
+      'Community Center': 'Community Center',
+      'Residential': 'Residential'
     };
     return labels[clientType] || clientType;
   };

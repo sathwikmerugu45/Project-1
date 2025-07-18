@@ -65,7 +65,7 @@ const ProductSpecifications = ({ specifications, className = '' }: ProductSpecif
         {/* Standards Tabs */}
         {standards.length > 1 && (
           <div className="flex space-x-0 mb-6 border-b">
-            {standards.map((standard, index) => (
+            {standards.map((standard, _index) => (
               <button
                 key={standard}
                 onClick={() => setActiveStandard(standard)}

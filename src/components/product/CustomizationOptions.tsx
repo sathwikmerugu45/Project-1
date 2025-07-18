@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CustomizationOption, CustomizationChoice } from '../../types/product';
+import { CustomizationOption} from '../../types/product';
 import { Check, Palette, Ruler, Package, Plus } from 'lucide-react';
 
 interface CustomizationOptionsProps {

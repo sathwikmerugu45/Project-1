@@ -20,7 +20,7 @@ const CertificationDisplay = ({ certifications, documents = [], className = '' }
     );
   }
 
-  const handleDownload = (url: string, filename: string) => {
+  const handleDownload = (url: string, _filename: string) => {
     // In a real application, this would handle the download
     window.open(url, '_blank');
   };

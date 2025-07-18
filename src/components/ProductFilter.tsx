@@ -68,9 +68,9 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     onFiltersChange({ ...filters, installationType: type });
   };
 
-  const handlePriceRangeChange = (newRange: [number, number]) => {
-    onFiltersChange({ ...filters, priceRange: newRange });
-  };
+  // const handlePriceRangeChange = (newRange: [number, number]) => {
+  //   onFiltersChange({ ...filters, priceRange: newRange });
+  // };
 
   const handleSortChange = (sortBy: ProductFilterState['sortBy']) => {
     onFiltersChange({ ...filters, sortBy });

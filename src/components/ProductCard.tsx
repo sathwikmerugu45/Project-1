@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Star, Heart, ShoppingCart, Shield, Users, MapPin } from 'lucide-react';
+import {  Heart, ShoppingCart, Shield, Users, MapPin } from 'lucide-react';
 import { Product } from '../types/product';
 import { AgeGroup, SafetyStandard } from '../types/common';
 import { useResponsive } from '../hooks/useResponsive';

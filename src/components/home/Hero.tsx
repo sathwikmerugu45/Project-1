@@ -1,7 +1,17 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Shield, Award, Globe, Star, CheckCircle, Play, Users, Clock } from 'lucide-react';
-import CertificationBadges from '../CertificationBadges';
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import {
+  ArrowRight,
+  Shield,
+  Award,
+  Globe,
+  Star,
+  CheckCircle,
+  Play,
+  Users,
+  Clock,
+} from "lucide-react";
+import CertificationBadges from "../CertificationBadges";
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -9,53 +19,124 @@ const Hero = () => {
 
   const slides = [
     {
-      image: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
-      title: 'Premium Playground Equipment',
-      subtitle: 'EN 1176, ASTM & CPSC Certified',
-      description: 'Professional playground solutions trusted by schools and communities worldwide',
+      image:
+        "https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop",
+      title: "Premium Playground Equipment",
+      subtitle: "EN 1176, ASTM & CPSC Certified",
+      description:
+        "Professional playground solutions trusted by schools and communities worldwide",
       cta: {
-        primary: { text: 'Explore Products', link: '/products', icon: ArrowRight },
-        secondary: { text: 'Get Free Quote', link: '/contact', icon: null },
-        tertiary: { text: 'Watch Demo', action: 'video', icon: Play }
+        primary: {
+          text: "Explore Products",
+          link: "/products",
+          icon: ArrowRight,
+        },
+        secondary: { text: "Get Free Quote", link: "/contact", icon: null },
+        tertiary: { text: "Watch Demo", action: "video", icon: Play },
       },
       stats: [
-        { icon: Shield, value: '25+', label: 'Years Experience', color: 'text-primary-400' },
-        { icon: Star, value: '1,200+', label: 'Projects Completed', color: 'text-accent-400' },
-        { icon: Users, value: '100K+', label: 'Happy Children', color: 'text-primary-400' }
-      ]
+        {
+          icon: Shield,
+          value: "25+",
+          label: "Years Experience",
+          color: "text-primary-400",
+        },
+        {
+          icon: Star,
+          value: "1,200+",
+          label: "Projects Completed",
+          color: "text-accent-400",
+        },
+        {
+          icon: Users,
+          value: "100K+",
+          label: "Happy Children",
+          color: "text-primary-400",
+        },
+      ],
     },
     {
-      image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
-      title: 'Safety First Innovation',
-      subtitle: 'International Standards Compliance',
-      description: 'Advanced safety features with cutting-edge playground technology',
+      image:
+        "https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop",
+      title: "Safety First Innovation",
+      subtitle: "International Standards Compliance",
+      description:
+        "Advanced safety features with cutting-edge playground technology",
       cta: {
-        primary: { text: 'View Safety Features', link: '/products?filter=safety', icon: Shield },
-        secondary: { text: 'Download Brochure', link: '/resources', icon: null },
-        tertiary: { text: 'Schedule Tour', link: '/contact', icon: Clock }
+        primary: {
+          text: "View Safety Features",
+          link: "/products?filter=safety",
+          icon: Shield,
+        },
+        secondary: {
+          text: "Download Brochure",
+          link: "/resources",
+          icon: null,
+        },
+        tertiary: { text: "Schedule Tour", link: "/contact", icon: Clock },
       },
       stats: [
-        { icon: CheckCircle, value: '100%', label: 'Safety Compliant', color: 'text-green-400' },
-        { icon: Award, value: '15+', label: 'Certifications', color: 'text-accent-400' },
-        { icon: Globe, value: '50+', label: 'Countries Served', color: 'text-primary-400' }
-      ]
+        {
+          icon: CheckCircle,
+          value: "100%",
+          label: "Safety Compliant",
+          color: "text-green-400",
+        },
+        {
+          icon: Award,
+          value: "15+",
+          label: "Certifications",
+          color: "text-accent-400",
+        },
+        {
+          icon: Globe,
+          value: "50+",
+          label: "Countries Served",
+          color: "text-primary-400",
+        },
+      ],
     },
     {
-      image: 'https://images.pexels.com/photos/1094072/pexels-photo-1094072.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
-      title: 'Custom Design Solutions',
-      subtitle: 'Tailored to Your Space',
-      description: 'Bespoke playground equipment designed for your specific requirements',
+      image:
+        "https://images.pexels.com/photos/1094072/pexels-photo-1094072.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop",
+      title: "Custom Design Solutions",
+      subtitle: "Tailored to Your Space",
+      description:
+        "Bespoke playground equipment designed for your specific requirements",
       cta: {
-        primary: { text: 'Start Design Process', link: '/contact?type=custom', icon: ArrowRight },
-        secondary: { text: 'View Portfolio', link: '/projects', icon: null },
-        tertiary: { text: 'Design Consultation', link: '/contact', icon: Users }
+        primary: {
+          text: "Start Design Process",
+          link: "/contact?type=custom",
+          icon: ArrowRight,
+        },
+        secondary: { text: "View Portfolio", link: "/projects", icon: null },
+        tertiary: {
+          text: "Design Consultation",
+          link: "/contact",
+          icon: Users,
+        },
       },
       stats: [
-        { icon: Star, value: '500+', label: 'Custom Designs', color: 'text-accent-400' },
-        { icon: Clock, value: '30 Days', label: 'Average Delivery', color: 'text-primary-400' },
-        { icon: CheckCircle, value: '98%', label: 'Client Satisfaction', color: 'text-green-400' }
-      ]
-    }
+        {
+          icon: Star,
+          value: "500+",
+          label: "Custom Designs",
+          color: "text-accent-400",
+        },
+        {
+          icon: Clock,
+          value: "30 Days",
+          label: "Average Delivery",
+          color: "text-primary-400",
+        },
+        {
+          icon: CheckCircle,
+          value: "98%",
+          label: "Client Satisfaction",
+          color: "text-green-400",
+        },
+      ],
+    },
   ];
 
   useEffect(() => {
@@ -91,19 +172,19 @@ const Hero = () => {
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
               {currentSlideData.title}
             </h1>
-            
+
             <h2 className="text-2xl md:text-3xl text-primary-400 mb-4 font-semibold">
               {currentSlideData.subtitle}
             </h2>
-            
+
             <p className="text-xl md:text-2xl text-neutral-200 mb-8 leading-relaxed max-w-3xl">
               {currentSlideData.description}
             </p>
 
             {/* Dynamic Call-to-Actions */}
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <Link 
-                to={currentSlideData.cta.primary.link} 
+              <Link
+                to={currentSlideData.cta.primary.link}
                 className="btn-primary inline-flex items-center justify-center group"
               >
                 {currentSlideData.cta.primary.text}
@@ -111,14 +192,14 @@ const Hero = () => {
                   <currentSlideData.cta.primary.icon className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 )}
               </Link>
-              <Link 
-                to={currentSlideData.cta.secondary.link} 
+              <Link
+                to={currentSlideData.cta.secondary.link}
                 className="btn-secondary inline-flex items-center justify-center"
               >
                 {currentSlideData.cta.secondary.text}
               </Link>
-              {currentSlideData.cta.tertiary.action === 'video' ? (
-                <button 
+              {currentSlideData.cta.tertiary.action === "video" ? (
+                <button
                   // onClick={() => setIsVideoPlaying(true)}
                   className="btn-outline inline-flex items-center justify-center group"
                 >
@@ -127,9 +208,9 @@ const Hero = () => {
                   )}
                   {currentSlideData.cta.tertiary.text}
                 </button>
-              ) : (
-                <Link 
-                  to={currentSlideData.cta.tertiary.link} 
+              ) : currentSlideData.cta.tertiary.link ? (
+                <Link
+                  to={currentSlideData.cta.tertiary.link}
                   className="btn-outline inline-flex items-center justify-center group"
                 >
                   {currentSlideData.cta.tertiary.icon && (
@@ -137,6 +218,13 @@ const Hero = () => {
                   )}
                   {currentSlideData.cta.tertiary.text}
                 </Link>
+              ) : (
+                <button className="btn-outline inline-flex items-center justify-center group">
+                  {currentSlideData.cta.tertiary.icon && (
+                    <currentSlideData.cta.tertiary.icon className="mr-2 w-5 h-5" />
+                  )}
+                  {currentSlideData.cta.tertiary.text}
+                </button>
               )}
             </div>
 
@@ -146,7 +234,9 @@ const Hero = () => {
                 <div key={index} className="text-center sm:text-left">
                   <div className="flex items-center justify-center sm:justify-start mb-2">
                     <stat.icon className={`w-6 h-6 ${stat.color} mr-2`} />
-                    <span className="text-3xl font-bold text-white">{stat.value}</span>
+                    <span className="text-3xl font-bold text-white">
+                      {stat.value}
+                    </span>
                   </div>
                   <p className="text-neutral-300">{stat.label}</p>
                 </div>
@@ -163,7 +253,7 @@ const Hero = () => {
             key={index}
             onClick={() => setCurrentSlide(index)}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              index === currentSlide ? 'bg-primary-400' : 'bg-white/30'
+              index === currentSlide ? "bg-primary-400" : "bg-white/30"
             }`}
           />
         ))}

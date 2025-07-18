@@ -1,118 +1,148 @@
-import { useParams, Link } from 'react-router-dom';
-import { useState } from 'react';
-import { ArrowLeft, MapPin, Calendar, Users, DollarSign, CheckCircle, Quote, Image as ImageIcon } from 'lucide-react';
-import ProjectImageViewer from '../components/project/ProjectImageViewer';
-import ProjectMetrics from '../components/project/ProjectMetrics';
-import BeforeAfterComparison from '../components/project/BeforeAfterComparison';
-// import { Project, ProjectMetrics as } from '../types/project';
+import { useParams, Link } from "react-router-dom";
+import { useState } from "react";
+import {
+  ArrowLeft,
+  MapPin,
+  Calendar,
+  Users,
+  DollarSign,
+  CheckCircle,
+  Quote,
+  Image as ImageIcon,
+} from "lucide-react";
+import ProjectImageViewer from "../components/project/ProjectImageViewer";
+import ProjectMetrics from "../components/project/ProjectMetrics";
+import BeforeAfterComparison from "../components/project/BeforeAfterComparison";
+import { Project } from '../types/project';
 
 const ProjectDetail = () => {
   const { id } = useParams();
-  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
+    null
+  );
 
   // Enhanced project data with advanced features
   const projectData: Record<string, Project> = {
-    '1': {
-      id: '1',
-      title: 'Riverside Community Park',
-      clientType: 'park',
-      clientName: 'City of Portland Parks & Recreation',
-      location: 'Portland, Oregon',
+    "1": {
+      id: "1",
+      title: "Riverside Community Park",
+      clientType: "Public Park",
+      clientName: "City of Portland Parks & Recreation",
+      location: "Portland, Oregon",
       completionYear: 2024,
       images: [
         {
-          id: '1',
-          url: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop',
-          alt: 'Riverside Community Park - Main playground area',
-          caption: 'Main playground area featuring natural play elements and inclusive design',
-          type: 'hero',
+          url: "https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop",
+          alt: "Riverside Community Park - Main playground area",
+          caption:
+            "Main playground area featuring natural play elements and inclusive design",
+          type: "hero",
           isZoomable: true,
           equipmentTags: [
-            { id: 'tag1', name: 'Natural Climbing Structure', x: 30, y: 40, productId: 'climb-001' },
-            { id: 'tag2', name: 'Accessible Ramp System', x: 60, y: 70 },
-            { id: 'tag3', name: 'Sensory Play Panel', x: 80, y: 30 }
-          ]
+            {
+              id: "tag1",
+              name: "Natural Climbing Structure",
+              x: 30,
+              y: 40,
+              productId: "climb-001",
+            },
+            { id: "tag2", name: "Accessible Ramp System", x: 60, y: 70 },
+            { id: "tag3", name: "Sensory Play Panel", x: 80, y: 30 },
+          ],
         },
         {
-          id: '2',
-          url: 'https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop',
-          alt: 'Riverside Community Park - Fitness area',
-          caption: 'Adult fitness stations integrated with playground design',
-          type: 'gallery',
+          url: "https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop",
+          alt: "Riverside Community Park - Fitness area",
+          caption: "Adult fitness stations integrated with playground design",
+          type: "gallery",
           isZoomable: true,
           equipmentTags: [
-            { id: 'tag4', name: 'Outdoor Fitness Station', x: 45, y: 50, productId: 'fitness-001' }
-          ]
+            {
+              id: "tag4",
+              name: "Outdoor Fitness Station",
+              x: 45,
+              y: 50,
+              productId: "fitness-001",
+            },
+          ],
         },
         {
-          id: '3',
-          url: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop',
-          alt: 'Riverside Community Park - Age-specific zones',
-          caption: 'Separate play zones designed for different age groups',
-          type: 'detail',
-          isZoomable: true
-        }
+          url: "https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop",
+          alt: "Riverside Community Park - Age-specific zones",
+          caption: "Separate play zones designed for different age groups",
+          type: "detail",
+          isZoomable: true,
+        },
       ],
-      description: 'The Riverside Community Park project transformed an underutilized green space into a vibrant community hub featuring natural play elements, inclusive equipment, and fitness stations for all ages. This comprehensive playground serves as a model for sustainable, accessible recreation design.',
-      equipmentUsed: ['Natural Climbing Structures', 'Accessible Ramp Systems', 'Sensory Play Panels', 'Fitness Stations', 'Shade Structures'],
+      description:
+        "The Riverside Community Park project transformed an underutilized green space into a vibrant community hub featuring natural play elements, inclusive equipment, and fitness stations for all ages. This comprehensive playground serves as a model for sustainable, accessible recreation design.",
+      equipmentUsed: [
+        "Natural Climbing Structures",
+        "Accessible Ramp Systems",
+        "Sensory Play Panels",
+        "Fitness Stations",
+        "Shade Structures",
+      ],
       testimonial: {
-        quote: "PlaygroundPro exceeded our expectations in every way. The installation was seamless, and the community response has been overwhelmingly positive. Children of all abilities can play together safely, which was our primary goal.",
-        author: "Sarah Johnson",
-        title: "Parks & Recreation Director",
-        organization: "City of Portland"
+        id: "testimonial-1",
+        clientName: "Sarah Johnson",
+        company: "City of Portland",
+        content: "PlaygroundPro exceeded our expectations in every way. The installation was seamless, and the community response has been overwhelmingly positive. Children of all abilities can play together safely, which was our primary goal.",
+        rating: 5,
       },
-      budgetRange: '$200K - $300K',
+      budgetRange: "$200K - $300K",
       isFeatured: true,
-      challenge: 'The City of Portland needed to revitalize a 5,000 square foot area that would serve a diverse community with varying ages and abilities. The space needed to accommodate high usage while maintaining environmental sustainability and ensuring universal accessibility.',
-      solution: 'Our team designed an integrated playground system that combines natural play elements with modern safety features. The design includes separate zones for different age groups, wheelchair-accessible pathways, and sustainable materials that blend seamlessly with the natural environment.',
+      challenge:
+        "The City of Portland needed to revitalize a 5,000 square foot area that would serve a diverse community with varying ages and abilities. The space needed to accommodate high usage while maintaining environmental sustainability and ensuring universal accessibility.",
+      solution:
+        "Our team designed an integrated playground system that combines natural play elements with modern safety features. The design includes separate zones for different age groups, wheelchair-accessible pathways, and sustainable materials that blend seamlessly with the natural environment.",
       features: [
-        'Natural play elements using sustainable materials',
-        'Fully accessible ramps and transfer platforms',
-        'Separate play zones for ages 2-5 and 5-12',
-        'Adult fitness stations integrated throughout',
-        'Shade structures and seating areas',
-        'Sustainable drainage and landscaping'
+        "Natural play elements using sustainable materials",
+        "Fully accessible ramps and transfer platforms",
+        "Separate play zones for ages 2-5 and 5-12",
+        "Adult fitness stations integrated throughout",
+        "Shade structures and seating areas",
+        "Sustainable drainage and landscaping",
       ],
       results: [
-        'Increased park usage by 300% within first month',
-        'Positive feedback from 95% of community members',
-        'Zero safety incidents since installation',
-        'Featured as model project by Oregon Parks Association',
-        'Reduced maintenance costs by 40% compared to previous equipment'
+        "Increased park usage by 300% within first month",
+        "Positive feedback from 95% of community members",
+        "Zero safety incidents since installation",
+        "Featured as model project by Oregon Parks Association",
+        "Reduced maintenance costs by 40% compared to previous equipment",
       ],
       metrics: {
         userCapacity: 200,
-        installationTime: '6 months',
+        installationTime: "6 months",
         budgetAmount: 250000,
         satisfactionScore: 4.8,
         safetyIncidents: 0,
-        usageIncrease: '300%',
-        maintenanceReduction: '40%',
+        usageIncrease: "300%",
+        maintenanceReduction: "40%",
         communityImpact: [
-          'Increased physical activity among local children by 250%',
-          'Created gathering space for 15+ community events annually',
-          'Improved property values in surrounding neighborhood by 12%',
-          'Provided accessible play opportunities for 50+ children with disabilities'
-        ]
+          "Increased physical activity among local children by 250%",
+          "Created gathering space for 15+ community events annually",
+          "Improved property values in surrounding neighborhood by 12%",
+          "Provided accessible play opportunities for 50+ children with disabilities",
+        ],
       },
-      timeline: '6 months from design to completion',
-      size: '5,000 sq ft',
+      timeline: "6 months from design to completion",
+      size: "5,000 sq ft",
       beforeAfterImages: {
         before: {
-          id: 'before-1',
-          url: 'https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-          alt: 'Empty lot before playground installation',
-          caption: 'Underutilized green space before transformation'
+          url: "https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+          alt: "Empty lot before playground installation",
+          caption: "Underutilized green space before transformation",
         },
         after: {
-          id: 'after-1',
-          url: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-          alt: 'Completed playground with children playing',
-          caption: 'Vibrant community playground serving 200+ children daily'
+          url: "https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+          alt: "Completed playground with children playing",
+          caption: "Vibrant community playground serving 200+ children daily",
         },
-        description: 'The transformation of Riverside Community Park from an empty lot to a thriving community hub demonstrates the power of thoughtful playground design.'
-      }
-    }
+        description:
+          "The transformation of Riverside Community Park from an empty lot to a thriving community hub demonstrates the power of thoughtful playground design.",
+      },
+    },
   };
 
   const project = projectData[id as keyof typeof projectData];
@@ -121,7 +151,9 @@ const ProjectDetail = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-neutral-900 mb-4">Project Not Found</h1>
+          <h1 className="text-2xl font-bold text-neutral-900 mb-4">
+            Project Not Found
+          </h1>
           <Link to="/projects" className="btn-primary">
             Back to Projects
           </Link>
@@ -135,12 +167,12 @@ const ProjectDetail = () => {
       {/* Hero Section */}
       <section className="relative h-96 flex items-center justify-center overflow-hidden">
         <img
-          src={project.images[0]}
+          src={project.images[0]?.url}
           alt={project.title}
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-neutral-900/60"></div>
-        
+
         <div className="relative z-10 container-max text-center text-white">
           <Link
             to="/projects"
@@ -183,7 +215,7 @@ const ProjectDetail = () => {
                 <p className="text-neutral-600 leading-relaxed mb-6">
                   {project.solution}
                 </p>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {project.features.map((feature, index) => (
                     <div key={index} className="flex items-start space-x-3">
@@ -199,12 +231,25 @@ const ProjectDetail = () => {
                   Results & Impact
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {project.results.map((result, index) => (
-                    <div key={index} className="flex items-start space-x-3">
-                      <CheckCircle className="w-5 h-5 text-accent-500 mt-1 flex-shrink-0" />
-                      <span className="text-neutral-700">{result}</span>
-                    </div>
-                  ))}
+                  {project.results.map(
+                    (
+                      result:
+                        | string
+                        | number
+                        | boolean
+                        | ReactElement<any, string | JSXElementConstructor<any>>
+                        | Iterable<ReactNode>
+                        | ReactPortal
+                        | null
+                        | undefined,
+                      index: Key | null | undefined
+                    ) => (
+                      <div key={index} className="flex items-start space-x-3">
+                        <CheckCircle className="w-5 h-5 text-accent-500 mt-1 flex-shrink-0" />
+                        <span className="text-neutral-700">{result}</span>
+                      </div>
+                    )
+                  )}
                 </div>
               </div>
             </div>
@@ -221,59 +266,83 @@ const ProjectDetail = () => {
                       <MapPin className="w-4 h-4 mr-2" />
                       Location
                     </span>
-                    <span className="text-neutral-900 font-medium">{project.location}</span>
+                    <span className="text-neutral-900 font-medium">
+                      {project.location}
+                    </span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="flex items-center text-neutral-600">
                       <Calendar className="w-4 h-4 mr-2" />
                       Completed
                     </span>
-                    <span className="text-neutral-900 font-medium">{project.completionYear}</span>
+                    <span className="text-neutral-900 font-medium">
+                      {project.completionYear}
+                    </span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="flex items-center text-neutral-600">
                       <Users className="w-4 h-4 mr-2" />
                       Capacity
                     </span>
-                    <span className="text-neutral-900 font-medium">{project.metrics.userCapacity}+ children</span>
+                    <span className="text-neutral-900 font-medium">
+                      {project.metrics.userCapacity}+ children
+                    </span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="flex items-center text-neutral-600">
                       <DollarSign className="w-4 h-4 mr-2" />
                       Investment
                     </span>
-                    <span className="text-neutral-900 font-medium">{project.budgetRange}</span>
+                    <span className="text-neutral-900 font-medium">
+                      {project.budgetRange}
+                    </span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="flex items-center text-neutral-600">
                       <MapPin className="w-4 h-4 mr-2" />
                       Client
                     </span>
-                    <span className="text-neutral-900 font-medium text-right text-sm">{project.clientName}</span>
+                    <span className="text-neutral-900 font-medium text-right text-sm">
+                      {project.clientName}
+                    </span>
                   </div>
                 </div>
               </div>
 
               {/* Testimonial */}
-              <div className="card p-6">
-                <div className="flex items-start space-x-3 mb-4">
-                  <Quote className="w-6 h-6 text-primary-400 mt-1 flex-shrink-0" />
-                  <blockquote className="text-neutral-700 italic leading-relaxed">
-                    "{project.testimonial.quote}"
-                  </blockquote>
+              {project.testimonial && (
+                <div className="card p-6">
+                  <div className="flex items-start space-x-3 mb-4">
+                    <Quote className="w-6 h-6 text-primary-400 mt-1 flex-shrink-0" />
+                    <blockquote className="text-neutral-700 italic leading-relaxed">
+                      "{project.testimonial.content}"
+                    </blockquote>
+                  </div>
+                  <div className="border-t border-neutral-100 pt-4">
+                    <div className="font-semibold text-neutral-900">
+                      {project.testimonial.clientName}
+                    </div>
+                    <div className="text-sm text-primary-600">
+                      {project.testimonial.company}
+                    </div>
+                    <div className="flex items-center mt-2">
+                      {[...Array(5)].map((_, i) => (
+                        <span
+                          key={i}
+                          className={`text-sm ${
+                            i < project.testimonial!.rating ? 'text-yellow-400' : 'text-gray-300'
+                          }`}
+                        >
+                          ★
+                        </span>
+                      ))}
+                      <span className="ml-2 text-sm text-gray-600">
+                        {project.testimonial.rating}/5
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <div className="border-t border-neutral-100 pt-4">
-                  <div className="font-semibold text-neutral-900">
-                    {project.testimonial.author}
-                  </div>
-                  <div className="text-sm text-neutral-600">
-                    {project.testimonial.title}
-                  </div>
-                  <div className="text-sm text-primary-600">
-                    {project.testimonial.organization}
-                  </div>
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
@@ -290,7 +359,9 @@ const ProjectDetail = () => {
       {project.beforeAfterImages && (
         <section className="section-padding bg-neutral-50">
           <div className="container-max">
-            <BeforeAfterComparison beforeAfterImages={project.beforeAfterImages} />
+            <BeforeAfterComparison
+              beforeAfterImages={project.beforeAfterImages}
+            />
           </div>
         </section>
       )}
@@ -307,10 +378,13 @@ const ProjectDetail = () => {
               <span>{project.images.length} images</span>
             </div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {project.images.map((image, index) => (
-              <div key={image.id} className="card overflow-hidden group cursor-pointer">
+              <div
+                key={index}
+                className="card overflow-hidden group cursor-pointer"
+              >
                 <div className="relative">
                   <img
                     src={image.url}
@@ -333,7 +407,9 @@ const ProjectDetail = () => {
                 </div>
                 {image.caption && (
                   <div className="p-4">
-                    <p className="text-sm text-neutral-600">{image.caption}</p>
+                    <p className="text-sm text-neutral-600">
+                      {image.caption}
+                    </p>
                   </div>
                 )}
               </div>
@@ -355,18 +431,22 @@ const ProjectDetail = () => {
       {/* CTA Section */}
       <section className="section-padding bg-primary-600 text-white">
         <div className="container-max text-center">
-          <h2 className="text-4xl font-bold mb-6">
-            Inspired by This Project?
-          </h2>
+          <h2 className="text-4xl font-bold mb-6">Inspired by This Project?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Let's discuss how we can create a similar transformation for your community. 
-            Our experts are ready to help bring your vision to life.
+            Let's discuss how we can create a similar transformation for your
+            community. Our experts are ready to help bring your vision to life.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/contact" className="bg-white text-primary-600 hover:bg-neutral-50 px-8 py-3 rounded-lg font-medium transition-colors">
+            <Link
+              to="/contact"
+              className="bg-white text-primary-600 hover:bg-neutral-50 px-8 py-3 rounded-lg font-medium transition-colors"
+            >
               Start Your Project
             </Link>
-            <Link to="/projects" className="border-2 border-white text-white hover:bg-white hover:text-primary-600 px-8 py-3 rounded-lg font-medium transition-colors">
+            <Link
+              to="/projects"
+              className="border-2 border-white text-white hover:bg-white hover:text-primary-600 px-8 py-3 rounded-lg font-medium transition-colors"
+            >
               View More Projects
             </Link>
           </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { X, ChevronRight, Search, Heart, ShoppingCart, User, Settings } from 'lucide-react';
+import { X, ChevronRight, Search, Heart, ShoppingCart, User } from 'lucide-react';
 import { useResponsive } from '../../hooks/useResponsive';
 import TouchFriendlyButton from '../common/TouchFriendlyButton';
 
@@ -16,7 +16,7 @@ const ResponsiveMobileNavigation: React.FC<ResponsiveMobileNavigationProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
   const location = useLocation();
-  const { isMobile, height } = useResponsive();
+  const { height } = useResponsive();
 
   // Close menu when route changes
   useEffect(() => {
