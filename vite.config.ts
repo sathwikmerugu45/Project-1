@@ -1,5 +1,5 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -9,41 +9,36 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          ui: ['framer-motion', 'lucide-react'],
-        }
-      }
+          vendor: ["react", "react-dom", "react-router-dom"],
+          ui: ["framer-motion", "lucide-react"],
+        },
+      },
     },
     // Enable source maps for production debugging
     sourcemap: true,
     // Optimize chunk size
     chunkSizeWarningLimit: 1000,
-    // Enable minification
-    minify: 'terser',
+    // Enable minification with terser
+    minify: "terser",
     terserOptions: {
       compress: {
         drop_console: true,
-        drop_debugger: true
-      }
-    }
-  },
-  server: {
-    // Enable compression
-    compress: true,
-    // Enable HTTP/2
-    http2: true
+        drop_debugger: true,
+      },
+    },
   },
   // Optimize dependencies
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom', 'framer-motion', 'lucide-react']
+    include: [
+      "react",
+      "react-dom",
+      "react-router-dom",
+      "framer-motion",
+      "lucide-react",
+    ],
   },
   // Enable CSS code splitting
   css: {
-    devSourcemap: true
+    devSourcemap: true,
   },
-  // Performance optimizations
-  esbuild: {
-    // Remove console logs in production
-    drop: ['console', 'debugger']
-  }
-})
+});
