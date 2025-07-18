@@ -4,7 +4,7 @@ import { ArrowLeft, MapPin, Calendar, Users, DollarSign, CheckCircle, Quote, Ima
 import ProjectImageViewer from '../components/project/ProjectImageViewer';
 import ProjectMetrics from '../components/project/ProjectMetrics';
 import BeforeAfterComparison from '../components/project/BeforeAfterComparison';
-import { Project, ProjectImage, ProjectMetrics as ProjectMetricsType, BeforeAfterImages } from '../types/project';
+import { Project, ProjectMetrics as } from '../types/project';
 
 const ProjectDetail = () => {
   const { id } = useParams();

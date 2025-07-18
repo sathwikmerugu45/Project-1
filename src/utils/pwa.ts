@@ -206,16 +206,16 @@ class PWAManager {
   }
 
   // Background sync
-  async requestBackgroundSync(tag: string): Promise<void> {
-    if (this.serviceWorkerRegistration?.sync) {
-      try {
-        await this.serviceWorkerRegistration.sync.register(tag);
-        console.log('Background sync registered:', tag);
-      } catch (error) {
-        console.error('Background sync registration failed:', error);
-      }
-    }
-  }
+  // async requestBackgroundSync(tag: string): Promise<void> {
+    // if (this.serviceWorkerRegistration?.sync) {
+      // try {
+      //   // await this.serviceWorkerRegistration.sync.register(tag);
+      //   console.log('Background sync registered:', tag);
+      // } catch (error) {
+      //   console.error('Background sync registration failed:', error);
+      // }
+    // }
+  // }
 
   // Push notifications
   async requestNotificationPermission(): Promise<NotificationPermission> {

@@ -5,7 +5,7 @@ import CertificationBadges from '../CertificationBadges';
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  // const [ setIsVideoPlaying] = useState(false);
 
   const slides = [
     {
@@ -119,7 +119,7 @@ const Hero = () => {
               </Link>
               {currentSlideData.cta.tertiary.action === 'video' ? (
                 <button 
-                  onClick={() => setIsVideoPlaying(true)}
+                  // onClick={() => setIsVideoPlaying(true)}
                   className="btn-outline inline-flex items-center justify-center group"
                 >
                   {currentSlideData.cta.tertiary.icon && (

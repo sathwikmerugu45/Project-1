@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { createIntersectionObserver, getOptimizedImageUrl, supportsWebP } from '../../utils/performance';
+import { createIntersectionObserver, getOptimizedImageUrl } from '../../utils/performance';
 
 interface LazyImageProps {
   src: string;
@@ -77,7 +77,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
     if (!width) return undefined;
     
     const widths = [width, width * 1.5, width * 2];
-    const webpSupported = supportsWebP();
+    // const webpSupported = supportsWebP();
     
     return widths
       .map(w => {

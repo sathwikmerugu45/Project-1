@@ -38,7 +38,7 @@ const ResponsiveImageGallery: React.FC<ResponsiveImageGalleryProps> = ({
   const galleryRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const { isMobile, isTablet } = useResponsive();
-  const isTouch = useTouch();
+  // const isTouch = useTouch();
 
   // Auto-play functionality
   useEffect(() => {

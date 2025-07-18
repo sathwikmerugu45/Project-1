@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Search, ChevronDown, Settings, Heart } from 'lucide-react';
+import { Menu, X, Search, ChevronDown, Settings } from 'lucide-react';
 import LanguageToggle from './LanguageToggle';
 import MegaMenu from './layout/MegaMenu';
 import SearchBar from './layout/SearchBar';
