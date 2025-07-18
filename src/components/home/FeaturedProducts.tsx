@@ -1,204 +1,91 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Star, Shield, Award, Eye, ShoppingCart } from 'lucide-react';
+import { ArrowRight, Star, Shield, Award, Eye, ShoppingCart, Filter, X } from 'lucide-react';
+import CertificationBadges from '../CertificationBadges';
 
 const FeaturedProducts = () => {
-  const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
 
   const featuredProducts = [
     {
-      id: 'biggo-swings',
-      name: 'Biggo Solo™ Swing',
-      model: 'DX-3100',
-      price: '$2,450',
-      originalPrice: '$2,850',
-      image: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-      category: 'Swings',
-      rating: 4.9,
-      reviews: 127,
-      features: ['EN 1176 Certified', 'Ages 2-12', 'Capacity: 4 users', 'Weather Resistant'],
-      badge: 'Best Seller',
-      badgeColor: 'bg-red-500'
+      id: 'early-childhood',
+      name: 'EARLY CHILDHOOD',
+      description: 'Start them off right with products designed for young play explorers ages 5 and under.',
+      image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&h=400',
+      category: 'Early Childhood'
     },
     {
-      id: 'rotating-climbers',
-      name: 'Spinner Pro™ Climber',
-      model: 'RC-2100',
-      price: '$5,850',
-      originalPrice: '$6,200',
-      image: 'https://images.pexels.com/photos/1094072/pexels-photo-1094072.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-      category: 'Climbers',
-      rating: 4.8,
-      reviews: 89,
-      features: ['360° Rotation', 'Ages 5-12', 'Capacity: 8 users', 'Premium Materials'],
-      badge: 'New',
-      badgeColor: 'bg-green-500'
+      id: 'school-age',
+      name: 'SCHOOL-AGE',
+      description: 'Wield the power of play with brain-boosting, age-appropriate equipment for kids ages 5 to 12.',
+      image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=600&h=400',
+      category: 'School Age'
     },
     {
-      id: 'frame-nets',
-      name: 'Climb Master™ Net',
-      model: 'FN-1500',
-      price: '$3,750',
-      originalPrice: '$4,100',
-      image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-      category: 'Nets',
-      rating: 4.7,
-      reviews: 156,
-      features: ['Heavy Duty Frame', 'Ages 5-12', 'Capacity: 12 users', 'Easy Installation'],
-      badge: 'Popular',
-      badgeColor: 'bg-blue-500'
+      id: 'fitness-wellness',
+      name: 'FITNESS & WELLNESS',
+      description: 'Develop healthy habits for life with outdoor fitness equipment designed for people ages 13 to 99.',
+      image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=600&h=400',
+      category: 'Fitness & Wellness'
     },
     {
-      id: 'nature-play',
-      name: 'Forest Explorer™',
-      model: 'NP-2500',
-      price: '$4,800',
-      originalPrice: '$5,200',
-      image: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-      category: 'Nature Play',
-      rating: 4.9,
-      reviews: 203,
-      features: ['Natural Materials', 'Ages 2-12', 'Eco-Friendly', 'Custom Design'],
-      badge: 'Eco Choice',
-      badgeColor: 'bg-green-600'
+      id: 'site-furnishings',
+      name: 'SITE FURNISHINGS',
+      description: 'Put the perfect finishing touches on your playground with benches, bike racks and tables.',
+      image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=600&h=400',
+      category: 'Site Furnishings'
     },
     {
-      id: 'mast-nets',
-      name: 'Sky Climber™ Mast',
-      model: 'MN-1800',
-      price: '$6,200',
-      originalPrice: '$6,800',
-      image: 'https://images.pexels.com/photos/1094072/pexels-photo-1094072.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-      category: 'Mast Nets',
-      rating: 4.6,
-      reviews: 74,
-      features: ['5m Height', 'Ages 8-15', 'Challenge Level: High', 'Safety Certified'],
-      badge: 'Premium',
-      badgeColor: 'bg-purple-500'
-    },
-    {
-      id: 'ropes-courses',
-      name: 'Adventure Trail™',
-      model: 'RC-3000',
-      price: '$8,500',
-      originalPrice: '$9,200',
-      image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-      category: 'Ropes Courses',
-      rating: 4.8,
-      reviews: 92,
-      features: ['Multi-Level', 'Ages 8-15', 'Team Building', 'Professional Grade'],
-      badge: 'Featured',
-      badgeColor: 'bg-orange-500'
+      id: 'sale-products',
+      name: 'SALE PRODUCTS',
+      description: "Don't let tight budgets hinder your path to play. Browse the best play products on sale now.",
+      image: 'https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?auto=format&fit=crop&w=600&h=400',
+      category: 'Sale Products'
     }
   ];
 
   return (
     <section className="section-padding bg-white">
       <div className="container-max">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">
-            Featured Products
+        <div className="flex items-center justify-between mb-12">
+          <h2 className="text-3xl font-bold text-neutral-900">
+            OUR PRODUCTS
           </h2>
-          <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
-            Discover our most popular playground equipment with competitive pricing and professional installation
-          </p>
+          <Link 
+            to="/products" 
+            className="text-orange-500 hover:text-orange-600 font-medium text-sm uppercase tracking-wide transition-colors"
+          >
+            VIEW ALL
+          </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
           {featuredProducts.map((product, index) => (
-            <div
+            <Link
               key={product.id}
-              className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-neutral-100"
-              onMouseEnter={() => setHoveredProduct(index)}
-              onMouseLeave={() => setHoveredProduct(null)}
+              to={`/products?category=${product.id}`}
+              className="group text-center hover:transform hover:scale-105 transition-all duration-300"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Product Image */}
-              <div className="relative overflow-hidden">
+              <div className="mb-4">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-32 object-contain mx-auto group-hover:scale-110 transition-transform duration-300"
                 />
-                
-                {/* Badge */}
-                <div className={`absolute top-4 left-4 ${product.badgeColor} text-white px-3 py-1 rounded-full text-sm font-medium`}>
-                  {product.badge}
-                </div>
-
-                {/* Quick Actions */}
-                <div className={`absolute top-4 right-4 flex flex-col space-y-2 transition-opacity duration-300 ${
-                  hoveredProduct === index ? 'opacity-100' : 'opacity-0'
-                }`}>
-                  <button className="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors">
-                    <Eye className="w-5 h-5 text-neutral-700" />
-                  </button>
-                  <button className="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center hover:bg-primary-700 transition-colors">
-                    <ShoppingCart className="w-5 h-5 text-white" />
-                  </button>
-                </div>
-
-                {/* Discount Badge */}
-                <div className="absolute bottom-4 left-4 bg-red-500 text-white px-2 py-1 rounded text-sm font-medium">
-                  Save {Math.round(((parseFloat(product.originalPrice.replace('$', '').replace(',', '')) - parseFloat(product.price.replace('$', '').replace(',', ''))) / parseFloat(product.originalPrice.replace('$', '').replace(',', ''))) * 100)}%
-                </div>
               </div>
 
               {/* Product Info */}
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm text-primary-600 font-medium">{product.category}</span>
-                  <div className="flex items-center space-x-1">
-                    <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                    <span className="text-sm text-neutral-600">{product.rating} ({product.reviews})</span>
-                  </div>
-                </div>
-
-                <h3 className="text-xl font-bold text-neutral-900 mb-1 group-hover:text-primary-600 transition-colors">
+              <div>
+                <h3 className="text-lg font-bold text-primary-600 mb-2 group-hover:text-primary-700 transition-colors">
                   {product.name}
                 </h3>
                 
-                <p className="text-sm text-neutral-500 mb-4">Model: {product.model}</p>
-
-                {/* Features */}
-                <div className="space-y-2 mb-4">
-                  {product.features.slice(0, 2).map((feature, idx) => (
-                    <div key={idx} className="flex items-center text-sm text-neutral-600">
-                      <div className="w-2 h-2 bg-primary-600 rounded-full mr-2"></div>
-                      {feature}
-                    </div>
-                  ))}
-                </div>
-
-                {/* Certifications */}
-                <div className="flex items-center space-x-2 mb-4">
-                  <Shield className="w-4 h-4 text-blue-600" />
-                  <Award className="w-4 h-4 text-green-600" />
-                  <span className="text-xs text-neutral-500">EN 1176 & ASTM Certified</span>
-                </div>
-
-                {/* Price */}
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <span className="text-2xl font-bold text-neutral-900">{product.price}</span>
-                    <span className="text-lg text-neutral-400 line-through ml-2">{product.originalPrice}</span>
-                  </div>
-                </div>
-
-                {/* Actions */}
-                <div className="flex space-x-2">
-                  <Link
-                    to={`/products/${product.id}`}
-                    className="flex-1 bg-primary-600 hover:bg-primary-700 text-white py-2 px-4 rounded-lg font-medium text-center transition-colors"
-                  >
-                    View Details
-                  </Link>
-                  <button className="bg-neutral-100 hover:bg-neutral-200 text-neutral-700 py-2 px-4 rounded-lg font-medium transition-colors">
-                    Quote
-                  </button>
-                </div>
+                <p className="text-sm text-neutral-600 leading-relaxed">
+                  {product.description}
+                </p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

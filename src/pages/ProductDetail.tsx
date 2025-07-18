@@ -1,257 +1,136 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Users, Activity, Heart, Zap } from 'lucide-react';
+import { ArrowLeft, Users, Activity, Heart, Zap, ShoppingCart, Share2, Bookmark } from 'lucide-react';
+import { sampleProducts } from '../data/products';
+import { Product, ProductVariant, CustomizationOption } from '../types/product';
+import { Certification } from '../types/certification';
+import ProductImageGallery from '../components/product/ProductImageGallery';
+import ProductSpecifications from '../components/product/ProductSpecifications';
+import ProductVariants from '../components/product/ProductVariants';
+import RelatedProducts from '../components/product/RelatedProducts';
+import CertificationDisplay from '../components/product/CertificationDisplay';
+import CustomizationOptions from '../components/product/CustomizationOptions';
 
 const ProductDetail = () => {
   const { id } = useParams();
-  const [activeSpec, setActiveSpec] = useState('ASTM');
+  const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(null);
+  const [customizationSelections, setCustomizationSelections] = useState<Record<string, string>>({});
 
-  // Mock product data based on the Biggo Swings example
-  const productData = {
-    'biggo-swings': {
-      title: 'Explore Our Biggo Swings Products',
-      subtitle: 'The best things in life are shared, so Sathwik took a traditional playground favourite and made it even better.',
-      products: [
+  // Find the product from our sample data
+  const currentProduct = sampleProducts.find(p => p.id === id);
+
+  // Enhanced product data with comprehensive details
+  const getEnhancedProduct = (product: Product): Product => {
+    // Create enhanced specifications based on existing data
+    const enhancedSpecs: Record<string, any> = {
+      ASTM: [
+        { name: 'Length', value: product.dimensions.split(' x ')[0] || '4m', unit: 'm', category: 'dimensions' },
+        { name: 'Width', value: product.dimensions.split(' x ')[1] || '3m', unit: 'm', category: 'dimensions' },
+        { name: 'Height', value: product.dimensions.split(' x ')[2] || '2.5m', unit: 'm', category: 'dimensions' },
+        { name: 'Capacity', value: product.capacity, unit: 'children', category: 'capacity' },
+        { name: 'Age Range', value: product.ageGroups.join(', '), unit: '', category: 'safety' },
+        { name: 'Installation Type', value: product.installationType, unit: '', category: 'safety' },
+        { name: 'Material', value: 'Galvanized Steel, HDPE', unit: '', category: 'materials' },
+        { name: 'Warranty', value: '10 years structural', unit: '', category: 'performance' }
+      ]
+    };
+
+    // Add variants for products with multiple configurations
+    const variants: ProductVariant[] = [];
+    if (product.id === 'biggo-swings') {
+      variants.push(
         {
-          id: 'dx-3100',
+          id: 'biggo-solo',
           name: 'Biggo Solo™',
           model: 'DX-3100',
-          image: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-          description: 'Our classic, inclusive biggo swing with 2 fro swinging action. This game allows for more people to swing together!',
-          features: [
-            { icon: Activity, label: 'Imagination', color: 'text-blue-500' },
-            { icon: Users, label: 'Inclusive', color: 'text-blue-500' },
-            { icon: Users, label: 'Interactive/Social', color: 'text-blue-500' },
-            { icon: Zap, label: 'Swinging', color: 'text-blue-500' },
-            { icon: Activity, label: 'Balancing', color: 'text-blue-500' },
-            { icon: Heart, label: 'Fitness', color: 'text-blue-500' }
-          ],
-          sku: 'DX-3100',
-          category: 'Biggo Swings',
-          price: '$2,450',
-          specifications: {
-            ASTM: {
-              'Size -- Length': '3.758 m',
-              'Size -- Height': '3.096 m',
-              'Ages': '2 - 12 yrs',
-              'Capacity': '4',
-              'Use Zone -- Length': '8.436 m',
-              'Use Zone -- Width': '7.416 m',
-              'Use Zone -- Area': '39.61 m²',
-              'Fall Height': '2.109 m'
-            },
-            CSA: {
-              'Size -- Length': '3.758 m',
-              'Size -- Height': '3.096 m',
-              'Ages': '2 - 12 yrs',
-              'Capacity': '4',
-              'Use Zone -- Length': '8.436 m',
-              'Use Zone -- Width': '7.416 m',
-              'Use Zone -- Area': '39.61 m²',
-              'Fall Height': '2.109 m'
-            },
-            EN: {
-              'Size -- Length': '3.758 m',
-              'Size -- Height': '3.096 m',
-              'Ages': '2 - 12 yrs',
-              'Capacity': '4',
-              'Use Zone -- Length': '8.436 m',
-              'Use Zone -- Width': '7.416 m',
-              'Use Zone -- Area': '39.61 m²',
-              'Fall Height': '2.109 m'
-            }
-          }
+          specifications: enhancedSpecs.ASTM,
+          images: product.images,
+          description: 'Single swing configuration for smaller spaces'
         },
         {
-          id: 'dx-3200',
+          id: 'biggo-duo',
           name: 'Biggo Duo™',
           model: 'DX-3200',
-          image: 'https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-          price: '$3,250'
-        },
-        {
-          id: 'dx-3300',
-          name: 'Biggo Trio™',
-          model: 'DX-3300',
-          image: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-          price: '$4,150'
+          specifications: enhancedSpecs.ASTM,
+          images: product.images,
+          priceModifier: 25,
+          description: 'Double swing configuration for increased capacity'
         }
-      ]
-    },
-    'rotating-climbers': {
-      title: 'Explore Our Rotating Climbers Products',
-      subtitle: 'Dynamic climbing equipment that challenges children while providing safe, engaging play experiences.',
-      products: [
-        {
-          id: 'rc-2100',
-          name: 'Spinner Pro™',
-          model: 'RC-2100',
-          image: 'https://images.pexels.com/photos/1094072/pexels-photo-1094072.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-          description: 'Revolutionary rotating climber that spins 360 degrees while children climb and play.',
-          features: [
-            { icon: Activity, label: 'Balance', color: 'text-green-500' },
-            { icon: Users, label: 'Social Play', color: 'text-green-500' },
-            { icon: Zap, label: 'Rotation', color: 'text-green-500' },
-            { icon: Heart, label: 'Fitness', color: 'text-green-500' }
-          ],
-          sku: 'RC-2100',
-          category: 'Rotating Climbers',
-          price: '$5,850',
-          specifications: {
-            ASTM: {
-              'Size -- Diameter': '4.2 m',
-              'Size -- Height': '3.5 m',
-              'Ages': '5 - 12 yrs',
-              'Capacity': '8',
-              'Use Zone -- Diameter': '10.2 m',
-              'Use Zone -- Area': '81.7 m²',
-              'Fall Height': '2.8 m'
-            }
-          }
-        }
-      ]
-    },
-    'frame-nets': {
-      title: 'Explore Our Frame Nets Products',
-      subtitle: 'Sturdy climbing nets that provide challenging and safe climbing experiences for all ages.',
-      products: [
-        {
-          id: 'fn-1500',
-          name: 'Climb Master™',
-          model: 'FN-1500',
-          image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-          description: 'Heavy-duty frame net designed for intensive climbing and exploration activities.',
-          features: [
-            { icon: Activity, label: 'Climbing', color: 'text-purple-500' },
-            { icon: Users, label: 'Group Play', color: 'text-purple-500' },
-            { icon: Heart, label: 'Strength', color: 'text-purple-500' }
-          ],
-          sku: 'FN-1500',
-          category: 'Frame Nets',
-          price: '$3,750',
-          specifications: {
-            ASTM: {
-              'Size -- Length': '6.0 m',
-              'Size -- Width': '4.0 m',
-              'Size -- Height': '3.2 m',
-              'Ages': '5 - 12 yrs',
-              'Capacity': '12',
-              'Use Zone -- Length': '12.0 m',
-              'Use Zone -- Width': '10.0 m',
-              'Use Zone -- Area': '120 m²',
-              'Fall Height': '2.5 m'
-            }
-          }
-        }
-      ]
-    },
-    'mast-nets': {
-      title: 'Explore Our Mast Nets Products',
-      subtitle: 'Tall climbing structures that challenge adventurous children with vertical climbing experiences.',
-      products: [
-        {
-          id: 'mn-1800',
-          name: 'Sky Climber™',
-          model: 'MN-1800',
-          image: 'https://images.pexels.com/photos/1094072/pexels-photo-1094072.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-          description: 'Towering mast net that provides the ultimate climbing challenge for brave adventurers.',
-          features: [
-            { icon: Activity, label: 'Adventure', color: 'text-red-500' },
-            { icon: Heart, label: 'Courage', color: 'text-red-500' },
-            { icon: Zap, label: 'Challenge', color: 'text-red-500' }
-          ],
-          sku: 'MN-1800',
-          category: 'Mast Nets',
-          price: '$6,200',
-          specifications: {
-            ASTM: {
-              'Size -- Diameter': '3.5 m',
-              'Size -- Height': '5.0 m',
-              'Ages': '8 - 15 yrs',
-              'Capacity': '6',
-              'Use Zone -- Diameter': '9.5 m',
-              'Use Zone -- Area': '70.9 m²',
-              'Fall Height': '4.2 m'
-            }
-          }
-        }
-      ]
-    },
-    'nature-play': {
-      title: 'Explore Our Nature Play Products',
-      subtitle: 'Natural play elements that connect children with nature while providing engaging play experiences.',
-      products: [
-        {
-          id: 'np-2500',
-          name: 'Forest Explorer™',
-          model: 'NP-2500',
-          image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-          description: 'Natural wood climbing structure that blends seamlessly with outdoor environments.',
-          features: [
-            { icon: Activity, label: 'Nature Connection', color: 'text-green-600' },
-            { icon: Users, label: 'Exploration', color: 'text-green-600' },
-            { icon: Heart, label: 'Sustainability', color: 'text-green-600' }
-          ],
-          sku: 'NP-2500',
-          category: 'Nature Play',
-          price: '$4,800',
-          specifications: {
-            ASTM: {
-              'Size -- Length': '8.0 m',
-              'Size -- Width': '6.0 m',
-              'Size -- Height': '2.5 m',
-              'Ages': '2 - 12 yrs',
-              'Capacity': '15',
-              'Use Zone -- Length': '14.0 m',
-              'Use Zone -- Width': '12.0 m',
-              'Use Zone -- Area': '168 m²',
-              'Fall Height': '1.8 m'
-            }
-          }
-        }
-      ]
-    },
-    'ropes-courses': {
-      title: 'Explore Our Ropes Courses Products',
-      subtitle: 'Challenging rope courses that develop balance, coordination, and confidence in children.',
-      products: [
-        {
-          id: 'rc-3000',
-          name: 'Adventure Trail™',
-          model: 'RC-3000',
-          image: 'https://images.pexels.com/photos/1094072/pexels-photo-1094072.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-          description: 'Multi-level rope course with various challenges and obstacles for skill development.',
-          features: [
-            { icon: Activity, label: 'Balance', color: 'text-orange-500' },
-            { icon: Users, label: 'Teamwork', color: 'text-orange-500' },
-            { icon: Heart, label: 'Confidence', color: 'text-orange-500' },
-            { icon: Zap, label: 'Agility', color: 'text-orange-500' }
-          ],
-          sku: 'RC-3000',
-          category: 'Ropes Courses',
-          price: '$8,500',
-          specifications: {
-            ASTM: {
-              'Size -- Length': '12.0 m',
-              'Size -- Width': '8.0 m',
-              'Size -- Height': '4.0 m',
-              'Ages': '8 - 15 yrs',
-              'Capacity': '10',
-              'Use Zone -- Length': '18.0 m',
-              'Use Zone -- Width': '14.0 m',
-              'Use Zone -- Area': '252 m²',
-              'Fall Height': '3.5 m'
-            }
-          }
-        }
-      ]
+      );
     }
+
+    // Add certifications
+    const certifications: Certification[] = product.safetyStandards.map(standard => ({
+      id: `${product.id}-${standard}`,
+      standard,
+      certificationNumber: `${standard}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`,
+      issuingBody: standard === 'EN 1176' ? 'European Committee for Standardization' : 'ASTM International',
+      validUntil: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000 * 2), // 2 years from now
+      regions: standard === 'EN 1176' ? ['Europe', 'UK'] : ['North America', 'Australia'],
+      logoUrl: `/certifications/${standard.toLowerCase().replace(' ', '-')}-logo.png`,
+      description: `${standard} safety certification for playground equipment`,
+      documentUrl: `/documents/${product.id}-${standard.toLowerCase().replace(' ', '-')}-cert.pdf`,
+      isValid: true
+    }));
+
+    // Add customization options
+    const customizationOptions: CustomizationOption[] = [
+      {
+        id: 'color',
+        name: 'Color Scheme',
+        type: 'color',
+        required: true,
+        options: [
+          { id: 'blue-green', name: 'Ocean Blue & Forest Green', description: 'Classic playground colors' },
+          { id: 'red-yellow', name: 'Fire Red & Sunshine Yellow', description: 'Vibrant and energetic', priceModifier: 5 },
+          { id: 'purple-orange', name: 'Royal Purple & Orange', description: 'Modern and bold', priceModifier: 10 },
+          { id: 'natural', name: 'Natural Wood Tones', description: 'Eco-friendly appearance', priceModifier: 15 }
+        ]
+      },
+      {
+        id: 'surfacing',
+        name: 'Safety Surfacing',
+        type: 'material',
+        required: false,
+        options: [
+          { id: 'rubber-mulch', name: 'Rubber Mulch', description: 'Recycled rubber surfacing', priceModifier: 20 },
+          { id: 'pour-in-place', name: 'Pour-in-Place Rubber', description: 'Seamless rubber surface', priceModifier: 35 },
+          { id: 'artificial-turf', name: 'Artificial Turf', description: 'Low maintenance grass alternative', priceModifier: 25 }
+        ]
+      }
+    ];
+
+    return {
+      ...product,
+      specifications: enhancedSpecs,
+      variants: variants.length > 0 ? variants : undefined,
+      certifications,
+      customizationOptions,
+      relatedProducts: sampleProducts
+        .filter(p => p.id !== product.id && (
+          p.category === product.category || 
+          p.ageGroups.some(age => product.ageGroups.includes(age))
+        ))
+        .slice(0, 4)
+        .map(p => p.id),
+      installationRequirements: [
+        'Level ground surface required',
+        'Minimum 2m clearance on all sides',
+        'Professional installation recommended',
+        'Concrete footings required for permanent installation'
+      ],
+      warranty: '10 years structural, 2 years components',
+      materials: ['Galvanized Steel Frame', 'HDPE Plastic Components', 'Stainless Steel Hardware']
+    };
   };
 
-  const product = productData[id as keyof typeof productData];
-  const mainProduct = product?.products[0];
+  useEffect(() => {
+    // Reset selections when product changes
+    setSelectedVariant(null);
+    setCustomizationSelections({});
+  }, [id]);
 
-  if (!product || !mainProduct) {
+  if (!currentProduct) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -264,204 +143,178 @@ const ProductDetail = () => {
     );
   }
 
+  const enhancedProduct = getEnhancedProduct(currentProduct);
+
+  const handleVariantSelect = (variant: ProductVariant) => {
+    setSelectedVariant(variant);
+  };
+
+  const handleCustomizationChange = (selections: Record<string, string>) => {
+    setCustomizationSelections(selections);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Breadcrumb */}
+      {/* Breadcrumb Navigation */}
       <div className="bg-white py-4 border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link
-            to="/products"
-            className="inline-flex items-center text-blue-600 hover:text-blue-700"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Products
-          </Link>
+          <nav className="flex items-center space-x-2 text-sm">
+            <Link to="/products" className="text-blue-600 hover:text-blue-700">
+              Products
+            </Link>
+            <span className="text-gray-500">/</span>
+            <span className="text-gray-900 capitalize">{enhancedProduct.category}</span>
+            <span className="text-gray-500">/</span>
+            <span className="text-gray-500">{enhancedProduct.name}</span>
+          </nav>
         </div>
       </div>
 
-      {/* Product Category Header */}
-      <section className="bg-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            {product.title}
-          </h1>
-          <p className="text-lg text-gray-600 max-w-4xl mx-auto">
-            {product.subtitle}
-          </p>
+      {/* Product Header */}
+      <section className="bg-white py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Product Image Gallery */}
+            <div>
+              <ProductImageGallery 
+                images={enhancedProduct.images} 
+                productName={enhancedProduct.name}
+              />
+            </div>
+
+            {/* Product Info */}
+            <div>
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                    {enhancedProduct.name}
+                  </h1>
+                  {enhancedProduct.model && (
+                    <p className="text-lg text-gray-600">Model: {enhancedProduct.model}</p>
+                  )}
+                </div>
+                
+                {/* Action Buttons */}
+                <div className="flex items-center space-x-2">
+                  <button className="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                    <Share2 className="w-5 h-5" />
+                  </button>
+                  <button className="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                    <Bookmark className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+
+              <p className="text-lg text-gray-600 mb-6">
+                {enhancedProduct.description}
+              </p>
+
+              {/* Key Features */}
+              <div className="grid grid-cols-2 gap-3 mb-6">
+                {enhancedProduct.features.slice(0, 6).map((feature, index) => (
+                  <div key={index} className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                    <span className="text-sm text-gray-700">{feature}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Age Groups & Certifications */}
+              <div className="flex flex-wrap gap-2 mb-6">
+                {enhancedProduct.ageGroups.map((ageGroup) => (
+                  <span
+                    key={ageGroup}
+                    className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800"
+                  >
+                    {ageGroup}
+                  </span>
+                ))}
+                {enhancedProduct.safetyStandards.map((standard) => (
+                  <span
+                    key={standard}
+                    className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800"
+                  >
+                    {standard}
+                  </span>
+                ))}
+              </div>
+
+              {/* Pricing */}
+              <div className="mb-8">
+                <div className="text-3xl font-bold text-blue-600 mb-2">
+                  {enhancedProduct.priceRange}
+                </div>
+                <p className="text-sm text-gray-500">
+                  Price varies based on configuration and installation requirements
+                </p>
+              </div>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button className="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center">
+                  <ShoppingCart className="w-5 h-5 mr-2" />
+                  Request Quote
+                </button>
+                <button className="flex-1 border border-gray-300 text-gray-700 py-3 px-6 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
+                  Download Brochure
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Product Variants */}
+      {enhancedProduct.variants && enhancedProduct.variants.length > 0 && (
+        <section className="py-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <ProductVariants
+              variants={enhancedProduct.variants}
+              selectedVariantId={selectedVariant?.id}
+              onVariantSelect={handleVariantSelect}
+            />
+          </div>
+        </section>
+      )}
+
+      {/* Customization Options */}
+      {enhancedProduct.customizationOptions && enhancedProduct.customizationOptions.length > 0 && (
+        <section className="py-12 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <CustomizationOptions
+              options={enhancedProduct.customizationOptions}
+              onSelectionChange={handleCustomizationChange}
+            />
+          </div>
+        </section>
+      )}
+
+      {/* Product Specifications */}
+      {enhancedProduct.specifications && (
+        <section className="py-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <ProductSpecifications specifications={enhancedProduct.specifications} />
+          </div>
+        </section>
+      )}
+
+      {/* Certifications */}
+      {enhancedProduct.certifications && enhancedProduct.certifications.length > 0 && (
+        <section className="py-12 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <CertificationDisplay certifications={enhancedProduct.certifications} />
+          </div>
+        </section>
+      )}
+
+      {/* Related Products */}
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            {product.products.map((item) => (
-              <div key={item.id} className="text-center">
-                <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-4">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-64 object-cover"
-                  />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  {item.name} | {item.model}
-                </h3>
-                {item.price && (
-                  <p className="text-lg font-bold text-blue-600 mb-4">
-                    {item.price}
-                  </p>
-                )}
-                <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                  Get More Info
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Detailed Product View */}
-      <section className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            {/* Product Image */}
-            <div>
-              <img
-                src={mainProduct.image}
-                alt={mainProduct.name}
-                className="w-full h-96 object-cover rounded-lg shadow-lg"
-              />
-            </div>
-
-            {/* Product Details */}
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                {mainProduct.name} | {mainProduct.model}
-              </h2>
-              
-              <p className="text-lg text-gray-600 mb-6">
-                {mainProduct.description}
-              </p>
-
-              {/* Features Grid */}
-              {mainProduct.features && (
-                <div className="grid grid-cols-2 gap-4 mb-8">
-                  {mainProduct.features.map((feature, index) => (
-                    <div key={index} className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                        <feature.icon className={`w-5 h-5 ${feature.color}`} />
-                      </div>
-                      <span className="text-gray-700">{feature.label}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {/* Product Info */}
-              <div className="space-y-2 mb-6">
-                <p><span className="font-semibold">SKU:</span> {mainProduct.sku}</p>
-                <p><span className="font-semibold">Category:</span> {mainProduct.category}</p>
-                <p className="text-2xl font-bold text-blue-600">{mainProduct.price}</p>
-              </div>
-
-              {/* CTA Button */}
-              <button className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-                Request Quote
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Specifications */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            {/* Specifications Table */}
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Specifications:</h3>
-              
-              {/* Spec Tabs */}
-              {mainProduct.specifications && (
-                <div className="flex space-x-0 mb-6">
-                  {Object.keys(mainProduct.specifications).map((spec) => (
-                    <button
-                      key={spec}
-                      onClick={() => setActiveSpec(spec)}
-                      className={`px-6 py-3 font-semibold transition-colors ${
-                        activeSpec === spec
-                          ? 'bg-blue-600 text-white'
-                          : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                      } ${spec === 'ASTM' ? 'rounded-l-lg' : spec === 'EN' ? 'rounded-r-lg' : ''}`}
-                    >
-                      {spec}
-                    </button>
-                  ))}
-                </div>
-              )}
-
-              {/* Specifications Table */}
-              {mainProduct.specifications && (
-                <div className="bg-white rounded-lg shadow overflow-hidden">
-                  <table className="w-full">
-                    <tbody>
-                      {Object.entries(mainProduct.specifications[activeSpec as keyof typeof mainProduct.specifications]).map(([key, value], index) => (
-                        <tr key={key} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
-                          <td className="px-6 py-4 text-sm font-medium text-gray-900">{key}</td>
-                          <td className="px-6 py-4 text-sm text-gray-600">{value as string}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              )}
-
-              <div className="mt-6 text-center">
-                <button className="text-blue-600 hover:text-blue-700 font-medium">
-                  Imperial | Metric
-                </button>
-              </div>
-            </div>
-
-            {/* Printable Resources */}
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Printable Resources:</h3>
-              
-              <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 bg-white rounded-lg shadow">
-                  <span className="text-gray-700">Layout Drawing</span>
-                  <div className="flex space-x-2">
-                    <button className="text-blue-600 hover:text-blue-700 font-medium">ASTM</button>
-                    <span className="text-gray-400">Alternatives: CSA, EN</span>
-                  </div>
-                </div>
-                
-                <div className="flex items-center justify-between p-4 bg-white rounded-lg shadow">
-                  <span className="text-gray-700">2D DWG</span>
-                  <div className="flex space-x-2">
-                    <button className="text-blue-600 hover:text-blue-700 font-medium">ASTM</button>
-                    <span className="text-gray-400">Alternatives: CSA, EN</span>
-                  </div>
-                </div>
-                
-                <div className="p-4 bg-white rounded-lg shadow">
-                  <button className="text-blue-600 hover:text-blue-700 font-medium block mb-2">
-                    Specification Sheet
-                  </button>
-                  <button className="text-blue-600 hover:text-blue-700 font-medium block mb-2">
-                    Product Rendering
-                  </button>
-                  <button className="text-blue-600 hover:text-blue-700 font-medium block mb-2">
-                    Colour Options
-                  </button>
-                  <button className="text-blue-600 hover:text-blue-700 font-medium block">
-                    Warranty
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <RelatedProducts
+            currentProduct={enhancedProduct}
+            allProducts={sampleProducts}
+            maxItems={4}
+          />
         </div>
       </section>
     </div>

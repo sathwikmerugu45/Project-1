@@ -1,27 +1,68 @@
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, MapPin, Calendar, Users, DollarSign, CheckCircle, Quote } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowLeft, MapPin, Calendar, Users, DollarSign, CheckCircle, Quote, Image as ImageIcon } from 'lucide-react';
+import ProjectImageViewer from '../components/project/ProjectImageViewer';
+import ProjectMetrics from '../components/project/ProjectMetrics';
+import BeforeAfterComparison from '../components/project/BeforeAfterComparison';
+import { Project, ProjectImage, ProjectMetrics as ProjectMetricsType, BeforeAfterImages } from '../types/project';
 
 const ProjectDetail = () => {
   const { id } = useParams();
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
 
-  // Mock project data - in a real app, this would come from an API
-  const projectData = {
+  // Enhanced project data with advanced features
+  const projectData: Record<string, Project> = {
     '1': {
+      id: '1',
       title: 'Riverside Community Park',
+      clientType: 'park',
+      clientName: 'City of Portland Parks & Recreation',
       location: 'Portland, Oregon',
-      type: 'Community Park',
-      completed: '2024',
-      budget: '$250,000',
-      capacity: '200+ children',
-      client: 'City of Portland Parks & Recreation',
-      duration: '6 months',
-      size: '5,000 sq ft',
+      completionYear: 2024,
       images: [
-        'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop',
-        'https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop',
-        'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop'
+        {
+          id: '1',
+          url: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop',
+          alt: 'Riverside Community Park - Main playground area',
+          caption: 'Main playground area featuring natural play elements and inclusive design',
+          type: 'hero',
+          isZoomable: true,
+          equipmentTags: [
+            { id: 'tag1', name: 'Natural Climbing Structure', x: 30, y: 40, productId: 'climb-001' },
+            { id: 'tag2', name: 'Accessible Ramp System', x: 60, y: 70 },
+            { id: 'tag3', name: 'Sensory Play Panel', x: 80, y: 30 }
+          ]
+        },
+        {
+          id: '2',
+          url: 'https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop',
+          alt: 'Riverside Community Park - Fitness area',
+          caption: 'Adult fitness stations integrated with playground design',
+          type: 'gallery',
+          isZoomable: true,
+          equipmentTags: [
+            { id: 'tag4', name: 'Outdoor Fitness Station', x: 45, y: 50, productId: 'fitness-001' }
+          ]
+        },
+        {
+          id: '3',
+          url: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop',
+          alt: 'Riverside Community Park - Age-specific zones',
+          caption: 'Separate play zones designed for different age groups',
+          type: 'detail',
+          isZoomable: true
+        }
       ],
-      overview: 'The Riverside Community Park project transformed an underutilized green space into a vibrant community hub featuring natural play elements, inclusive equipment, and fitness stations for all ages. This comprehensive playground serves as a model for sustainable, accessible recreation design.',
+      description: 'The Riverside Community Park project transformed an underutilized green space into a vibrant community hub featuring natural play elements, inclusive equipment, and fitness stations for all ages. This comprehensive playground serves as a model for sustainable, accessible recreation design.',
+      equipmentUsed: ['Natural Climbing Structures', 'Accessible Ramp Systems', 'Sensory Play Panels', 'Fitness Stations', 'Shade Structures'],
+      testimonial: {
+        quote: "PlaygroundPro exceeded our expectations in every way. The installation was seamless, and the community response has been overwhelmingly positive. Children of all abilities can play together safely, which was our primary goal.",
+        author: "Sarah Johnson",
+        title: "Parks & Recreation Director",
+        organization: "City of Portland"
+      },
+      budgetRange: '$200K - $300K',
+      isFeatured: true,
       challenge: 'The City of Portland needed to revitalize a 5,000 square foot area that would serve a diverse community with varying ages and abilities. The space needed to accommodate high usage while maintaining environmental sustainability and ensuring universal accessibility.',
       solution: 'Our team designed an integrated playground system that combines natural play elements with modern safety features. The design includes separate zones for different age groups, wheelchair-accessible pathways, and sustainable materials that blend seamlessly with the natural environment.',
       features: [
@@ -39,11 +80,37 @@ const ProjectDetail = () => {
         'Featured as model project by Oregon Parks Association',
         'Reduced maintenance costs by 40% compared to previous equipment'
       ],
-      testimonial: {
-        quote: "PlaygroundPro exceeded our expectations in every way. The installation was seamless, and the community response has been overwhelmingly positive. Children of all abilities can play together safely, which was our primary goal.",
-        author: "Sarah Johnson",
-        title: "Parks & Recreation Director",
-        organization: "City of Portland"
+      metrics: {
+        userCapacity: 200,
+        installationTime: '6 months',
+        budgetAmount: 250000,
+        satisfactionScore: 4.8,
+        safetyIncidents: 0,
+        usageIncrease: '300%',
+        maintenanceReduction: '40%',
+        communityImpact: [
+          'Increased physical activity among local children by 250%',
+          'Created gathering space for 15+ community events annually',
+          'Improved property values in surrounding neighborhood by 12%',
+          'Provided accessible play opportunities for 50+ children with disabilities'
+        ]
+      },
+      timeline: '6 months from design to completion',
+      size: '5,000 sq ft',
+      beforeAfterImages: {
+        before: {
+          id: 'before-1',
+          url: 'https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+          alt: 'Empty lot before playground installation',
+          caption: 'Underutilized green space before transformation'
+        },
+        after: {
+          id: 'after-1',
+          url: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+          alt: 'Completed playground with children playing',
+          caption: 'Vibrant community playground serving 200+ children daily'
+        },
+        description: 'The transformation of Riverside Community Park from an empty lot to a thriving community hub demonstrates the power of thoughtful playground design.'
       }
     }
   };
@@ -97,7 +164,7 @@ const ProjectDetail = () => {
                 Project Overview
               </h2>
               <p className="text-lg text-neutral-600 mb-8 leading-relaxed">
-                {project.overview}
+                {project.description}
               </p>
 
               <div className="mb-12">
@@ -161,21 +228,28 @@ const ProjectDetail = () => {
                       <Calendar className="w-4 h-4 mr-2" />
                       Completed
                     </span>
-                    <span className="text-neutral-900 font-medium">{project.completed}</span>
+                    <span className="text-neutral-900 font-medium">{project.completionYear}</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="flex items-center text-neutral-600">
                       <Users className="w-4 h-4 mr-2" />
                       Capacity
                     </span>
-                    <span className="text-neutral-900 font-medium">{project.capacity}</span>
+                    <span className="text-neutral-900 font-medium">{project.metrics.userCapacity}+ children</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="flex items-center text-neutral-600">
                       <DollarSign className="w-4 h-4 mr-2" />
                       Investment
                     </span>
-                    <span className="text-neutral-900 font-medium">{project.budget}</span>
+                    <span className="text-neutral-900 font-medium">{project.budgetRange}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="flex items-center text-neutral-600">
+                      <MapPin className="w-4 h-4 mr-2" />
+                      Client
+                    </span>
+                    <span className="text-neutral-900 font-medium text-right text-sm">{project.clientName}</span>
                   </div>
                 </div>
               </div>
@@ -205,26 +279,78 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Image Gallery */}
-      <section className="section-padding bg-neutral-50">
+      {/* Project Metrics */}
+      <section className="section-padding bg-white">
         <div className="container-max">
-          <h2 className="text-3xl font-bold text-neutral-900 mb-12 text-center">
-            Project Gallery
-          </h2>
+          <ProjectMetrics metrics={project.metrics} />
+        </div>
+      </section>
+
+      {/* Before/After Comparison */}
+      {project.beforeAfterImages && (
+        <section className="section-padding bg-neutral-50">
+          <div className="container-max">
+            <BeforeAfterComparison beforeAfterImages={project.beforeAfterImages} />
+          </div>
+        </section>
+      )}
+
+      {/* Enhanced Image Gallery */}
+      <section className="section-padding bg-white">
+        <div className="container-max">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-3xl font-bold text-neutral-900">
+              Project Gallery
+            </h2>
+            <div className="flex items-center text-neutral-600">
+              <ImageIcon className="w-5 h-5 mr-2" />
+              <span>{project.images.length} images</span>
+            </div>
+          </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {project.images.map((image, index) => (
-              <div key={index} className="card overflow-hidden">
-                <img
-                  src={image}
-                  alt={`${project.title} - Image ${index + 1}`}
-                  className="w-full h-64 object-cover hover:scale-110 transition-transform duration-500"
-                />
+              <div key={image.id} className="card overflow-hidden group cursor-pointer">
+                <div className="relative">
+                  <img
+                    src={image.url}
+                    alt={image.alt}
+                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                    onClick={() => setSelectedImageIndex(index)}
+                  />
+                  {image.equipmentTags && image.equipmentTags.length > 0 && (
+                    <div className="absolute top-3 right-3 bg-primary-600 text-white px-2 py-1 rounded-full text-xs font-medium">
+                      {image.equipmentTags.length} tags
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="bg-white/90 backdrop-blur-sm rounded-full p-3">
+                        <ImageIcon className="w-6 h-6 text-neutral-900" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {image.caption && (
+                  <div className="p-4">
+                    <p className="text-sm text-neutral-600">{image.caption}</p>
+                  </div>
+                )}
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Image Viewer Modal */}
+      {selectedImageIndex !== null && (
+        <ProjectImageViewer
+          images={project.images}
+          currentIndex={selectedImageIndex}
+          onClose={() => setSelectedImageIndex(null)}
+          onImageChange={setSelectedImageIndex}
+        />
+      )}
 
       {/* CTA Section */}
       <section className="section-padding bg-primary-600 text-white">

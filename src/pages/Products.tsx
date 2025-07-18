@@ -1,101 +1,90 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Filter, Search } from 'lucide-react';
+import { useState, useMemo } from 'react';
+import ProductFilter, { ProductFilterState } from '../components/ProductFilter';
+import ProductCard from '../components/ProductCard';
+import { sampleProducts, productCategories } from '../data/products';
+import { Product } from '../types/product';
 
 const Products = () => {
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [filters, setFilters] = useState<ProductFilterState>({
+    ageGroups: [],
+    safetyStandards: [],
+    installationType: 'all',
+    categories: [],
+    priceRange: [0, 20000],
+    searchQuery: '',
+    sortBy: 'name'
+  });
 
-  const categories = [
-    { id: 'all', name: 'All Products' },
-    { id: 'swings', name: 'Swings' },
-    { id: 'climbers', name: 'Climbers' },
-    { id: 'nets', name: 'Nets' },
-    { id: 'nature', name: 'Nature Play' },
-    { id: 'ropes', name: 'Ropes Courses' },
-    { id: 'sports', name: 'Sports & Fitness' },
-  ];
+  // Filter and sort products
+  const filteredProducts = useMemo(() => {
+    let filtered = sampleProducts.filter((product: Product) => {
+      // Age group filter
+      if (filters.ageGroups.length > 0) {
+        const hasMatchingAgeGroup = filters.ageGroups.some(ageGroup => 
+          product.ageGroups.includes(ageGroup)
+        );
+        if (!hasMatchingAgeGroup) return false;
+      }
 
-  const products = [
-    {
-      id: 'biggo-swings',
-      name: 'Biggo Swings',
-      category: 'swings',
-      image: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
-      description: 'Premium swing sets designed for maximum fun and safety'
-    },
-    {
-      id: 'rotating-climbers',
-      name: 'Rotating Climbers',
-      category: 'climbers',
-      image: 'https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
-      description: 'Dynamic climbing equipment that rotates for added challenge'
-    },
-    {
-      id: 'frame-nets',
-      name: 'Frame Nets',
-      category: 'nets',
-      image: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
-      description: 'Sturdy frame nets for climbing and exploration'
-    },
-    {
-      id: 'mast-nets',
-      name: 'Mast Nets',
-      category: 'nets',
-      image: 'https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
-      description: 'Tall mast nets for adventurous climbing experiences'
-    },
-    {
-      id: 'nature-play',
-      name: 'Nature Play',
-      category: 'nature',
-      image: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
-      description: 'Natural play elements that connect children with nature'
-    },
-    {
-      id: 'ropes-courses',
-      name: 'Ropes Courses',
-      category: 'ropes',
-      image: 'https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
-      description: 'Challenging rope courses for skill development'
-    },
-    {
-      id: 'custom-creations',
-      name: 'Custom Creations',
-      category: 'all',
-      image: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
-      description: 'Bespoke playground equipment tailored to your needs'
-    },
-    {
-      id: 'sports-fitness',
-      name: 'Sports and Fitness',
-      category: 'sports',
-      image: 'https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
-      description: 'Outdoor fitness equipment for all ages'
-    },
-    {
-      id: 'conludo',
-      name: 'Conludo',
-      category: 'all',
-      image: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
-      description: 'Interactive play solutions for modern playgrounds'
-    },
-    {
-      id: 'natures-aura',
-      name: "Nature's Aura",
-      category: 'nature',
-      image: 'https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
-      description: 'Immersive natural play environments'
-    }
-  ];
+      // Safety standards filter
+      if (filters.safetyStandards.length > 0) {
+        const hasMatchingStandard = filters.safetyStandards.some(standard => 
+          product.safetyStandards.includes(standard)
+        );
+        if (!hasMatchingStandard) return false;
+      }
 
-  const filteredProducts = activeCategory === 'all' 
-    ? products 
-    : products.filter(product => product.category === activeCategory)
-      .filter(product => 
-        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.description.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+      // Installation type filter
+      if (filters.installationType !== 'all') {
+        if (product.installationType !== filters.installationType) return false;
+      }
+
+      // Category filter
+      if (filters.categories.length > 0) {
+        if (!filters.categories.includes(product.category)) return false;
+      }
+
+      // Search query filter
+      if (filters.searchQuery) {
+        const query = filters.searchQuery.toLowerCase();
+        const matchesName = product.name.toLowerCase().includes(query);
+        const matchesDescription = product.description.toLowerCase().includes(query);
+        const matchesFeatures = product.features.some(feature => 
+          feature.toLowerCase().includes(query)
+        );
+        if (!matchesName && !matchesDescription && !matchesFeatures) return false;
+      }
+
+      return true;
+    });
+
+    // Sort products
+    filtered.sort((a, b) => {
+      switch (filters.sortBy) {
+        case 'name':
+          return a.name.localeCompare(b.name);
+        case 'price':
+          // Simple price comparison based on first number in price range
+          const priceA = parseInt(a.priceRange.replace(/[^0-9]/g, ''));
+          const priceB = parseInt(b.priceRange.replace(/[^0-9]/g, ''));
+          return priceA - priceB;
+        case 'popularity':
+          // Sort by popular first, then featured, then new
+          const scoreA = (a.isPopular ? 3 : 0) + (a.isFeatured ? 2 : 0) + (a.isNew ? 1 : 0);
+          const scoreB = (b.isPopular ? 3 : 0) + (b.isFeatured ? 2 : 0) + (b.isNew ? 1 : 0);
+          return scoreB - scoreA;
+        case 'newest':
+          // Sort new items first
+          if (a.isNew && !b.isNew) return -1;
+          if (!a.isNew && b.isNew) return 1;
+          return a.name.localeCompare(b.name);
+        default:
+          return 0;
+      }
+    });
+
+    return filtered;
+  }, [filters]);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -112,75 +101,63 @@ const Products = () => {
         </div>
       </section>
 
-      {/* Category Filter */}
-      <section className="bg-white py-8 border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Search Bar */}
-          <div className="max-w-md mx-auto mb-6">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-neutral-400" />
-              <input
-                type="text"
-                placeholder="Search products..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-neutral-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-              />
-            </div>
-          </div>
-          
-          {/* Category Filters */}
-          <div className="flex items-center justify-center mb-4">
-            <Filter className="w-5 h-5 text-neutral-600 mr-3" />
-            <span className="text-neutral-600 font-medium mr-4">Filter by category:</span>
-          </div>
-          <div className="flex flex-wrap justify-center gap-4">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setActiveCategory(category.id)}
-                className={`px-6 py-2 rounded-full font-medium transition-all duration-200 ${
-                  activeCategory === category.id
-                    ? 'bg-blue-600 text-white shadow-lg'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                {category.name}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Enhanced Product Filter */}
+      <ProductFilter
+        filters={filters}
+        onFiltersChange={setFilters}
+        categories={productCategories}
+        priceRange={[0, 20000]}
+      />
 
       {/* Products Grid */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-            {filteredProducts.map((product, index) => (
-              <Link
+          {/* Results Summary */}
+          <div className="mb-8">
+            <p className="text-gray-600">
+              Showing {filteredProducts.length} of {sampleProducts.length} products
+            </p>
+          </div>
+
+          {/* Products Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filteredProducts.map((product) => (
+              <ProductCard
                 key={product.id}
-                to={`/products/${product.id}`}
-                className="group bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="relative overflow-hidden rounded-t-lg">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                </div>
-                <div className="p-6 text-center">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-                    {product.name}
-                  </h3>
-                  <p className="text-sm text-gray-600">
-                    {product.description}
-                  </p>
-                </div>
-              </Link>
+                product={product}
+                searchTerm={filters.searchQuery}
+              />
             ))}
           </div>
+
+          {/* No Results Message */}
+          {filteredProducts.length === 0 && (
+            <div className="text-center py-16">
+              <div className="text-gray-400 mb-4">
+                <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.47-.881-6.08-2.33" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">No products found</h3>
+              <p className="text-gray-600 mb-4">
+                Try adjusting your filters or search terms to find what you're looking for.
+              </p>
+              <button
+                onClick={() => setFilters({
+                  ageGroups: [],
+                  safetyStandards: [],
+                  installationType: 'all',
+                  categories: [],
+                  priceRange: [0, 20000],
+                  searchQuery: '',
+                  sortBy: 'name'
+                })}
+                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Clear All Filters
+              </button>
+            </div>
+          )}
         </div>
       </section>
     </div>
